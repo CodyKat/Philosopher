@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 04:45:39 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/12 19:37:33 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:33:05 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@
 # define LOCK 1 
 # define SET 0
 # define GET 1
-# define IS_DEAD 1
+# define DEAD 1 
 # define NOBODY_DEAD 0
 # define EAT 0
 # define SLEEP 1
 # define THINK 2
 # define FORK 3
-# define DEAD 4
 
 typedef struct s_union_info
 {
@@ -52,12 +51,11 @@ typedef struct s_union_info
 	size_t			time_to_sleep;
 	size_t			num_each_philo_must_eat;
 	int				*fork_status;
-	size_t			time_to_start;
-	pthread_t		**philo_arr;
-	pthread_mutex_t	**fork_arr;
+	long long		time_to_start;
+	pthread_t		*philo_arr;
+	pthread_mutex_t	*fork_arr;
 	pthread_mutex_t	voice;
 	pthread_mutex_t	start_key;
-	pthread_mutex_t	key_of_deadflag_box;
 }	t_union_info;
 
 typedef struct s_philo_info
@@ -71,7 +69,7 @@ typedef struct s_philo_info
 }	t_philo_info;
 
 size_t	ft_atoul(char *str);
-size_t	timeval_to_ms(struct timeval time_t);
+size_t	ft_time(void);
 void	philo_is_speaking(t_philo_info *info, size_t time, char *str, int state);
 void	get_my_right_fork(t_philo_info *info);
 void	get_my_left_fork(t_philo_info *info);
