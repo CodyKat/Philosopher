@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 04:43:56 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/12 16:54:00 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:37:33 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,6 @@ void	free_union_info(t_union_info *info)
 
 void	philo_is_speaking(t_philo_info *info, size_t time, char *str, int state)
 {
-	if (box_has_dead_flag(info->union_info, GET) && (state != DEAD))
-	{
-		pthread_mutex_unlock(&info->union_info->key_of_deadflag_box);
-		return ;
-	}
-	pthread_mutex_unlock(&info->union_info->key_of_deadflag_box);
 	pthread_mutex_lock(&info->union_info->voice);
 	printf("%zu %zu %s\n", time, info->my_id, str);
 	pthread_mutex_unlock(&info->union_info->voice);
@@ -229,7 +223,7 @@ int	box_has_dead_flag(t_union_info *info, int getset_option)
 	pthread_mutex_lock(&info->key_of_deadflag_box);
 	if (getset_option == SET)
 	{
-		info->is_someone_dead = 1;
+		info->is_someone_dead = DEAD;
 		pthread_mutex_unlock(&info->key_of_deadflag_box);
 		return (DEAD);
 	}
@@ -260,8 +254,8 @@ void	watcher(t_philo_info **philo_info, size_t num_of_philo)
 				cur_time_in_ms - philo_info[philo_count]->time_of_last_meal;
 			if (time_to_starve >= time_to_die)
 			{
-				// pthread_mutex_lock(&(*philo_info)->union_info->key_of_deadflag_box);
 				box_has_dead_flag((*philo_info)->union_info, SET);
+				// pthread_mutex_lock(&(*philo_info)->union_info->key_of_deadflag_box);
 				// pthread_mutex_unlock(&(*philo_info)->union_info->key_of_deadflag_box);
 				philo_is_speaking(philo_info[philo_count], \
 					cur_time_in_ms - philo_info[0]->union_info->time_to_start, \
@@ -307,7 +301,6 @@ int	main(int argc, char *argv[])
 	while (++philo_num < union_info.num_of_philo)
 		pthread_join(*union_info.philo_arr[philo_num], 0);
 	// free_all_resource(&union_info);
-
 	return (0);
 }
 

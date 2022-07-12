@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 04:45:39 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/12 16:33:15 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/12 19:37:33 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,14 @@ typedef struct s_philo_info
 }	t_philo_info;
 
 size_t	ft_atoul(char *str);
-void	philo_is_speaking(t_philo_info *info, size_t time, char *str, int state);
 size_t	timeval_to_ms(struct timeval time_t);
+void	philo_is_speaking(t_philo_info *info, size_t time, char *str, int state);
 void	get_my_right_fork(t_philo_info *info);
 void	get_my_left_fork(t_philo_info *info);
 void	philo_sleep(t_philo_info *info);
 void	philo_eat(t_philo_info *info);
 void	philo_think(t_philo_info *info);
-int	box_has_dead_flag(t_union_info *info, int getset_option);
 void	control_fork_status(t_union_info *union_info, int fork_num, int mode);
+int	box_has_dead_flag(t_union_info *info, int getset_option);
+int	is_someone_dead(t_union_info *info);
 #endif
