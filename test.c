@@ -30,18 +30,18 @@ int main()
         exit(0);
     } 
 	// usleep(1000 * 1000 * 5);
-    pthread_detach(p_thread1);
-    //pthread_detach(p_thread2);
-    pthread_join(p_thread1, 0);
-   // pthread_join(p_thread2, 0);
+    // pthread_detach(p_thread1);
+    // pthread_detach(p_thread2);
+    // pthread_join(p_thread1, 0);
+    // pthread_join(p_thread2, 0);
 
-    int s = 0;
-    while (s != 10)
-	{
-		printf("%d초 경과\n", s);
-		usleep(1000 * 1000);
-		s++;
-	}
+    // int s = 0;
+    // while (s != 10)
+	// {
+	// 	printf("%d초 경과\n", s);
+	// 	usleep(1000 * 1000);
+	// 	s++;
+	// }
 	printf("main() 종료\n");
     return 0;
 }

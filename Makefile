@@ -1,15 +1,20 @@
 CC = cc
 NAME = philo
-#CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g# -Wall -Wextra -Werror
+THREAD_FLAGS = -lpthread
 SRCS =	main.c	\
-		util_1.c
+		util_1.c	\
+		philos_behave.c
 
 OBJS = ${SRCS:.c=.o}
 
 all : ${NAME}
 
 $(NAME) : ${OBJS}
-	${CC} -o ${NAME} ${CFLAGS} ${OBJS}
+	${CC} -o ${NAME} ${THREAD_FLAGS} ${CFLAGS} ${OBJS}
+
+%.o:%.c
+	${CC} ${CFLAGS} -o $@ -c $<
 
 clean : 
 	rm -f ${OBJS}

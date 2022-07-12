@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 04:53:21 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/09 06:08:05 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/11 17:32:42 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_isdigit(char c)
 		return (TRUE);
 	else
 		return (FALSE);
-	
 }
 
 size_t ft_atoul(char *str)
