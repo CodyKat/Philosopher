@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 00:16:58 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/13 04:14:59 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/13 12:48:44 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_print_log(t_philo *info_philo, long time, char *message, int is_last)
 	pthread_mutex_lock(&info_philo->info_union->voice);
 	if (shutdown_flag == FALSE)
 		printf("%ld %d %s\n", time, info_philo->my_id, message);
-	if ((info_philo->info_union->is_someone_dead == TRUE) ||
+	if ((info_philo->info_union->is_someone_dead == TRUE) || \
 			(info_philo->info_union->all_philo_full == TRUE))
 		shutdown_flag = TRUE;
 	pthread_mutex_unlock(&info_philo->info_union->voice);

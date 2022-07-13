@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 00:17:13 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/13 04:06:51 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:09:29 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@
 
 typedef struct s_union
 {
-	pthread_t		*philo_thread;
-	pthread_mutex_t	*fork_key;
+	pthread_t		*philo_thread;//
+	pthread_mutex_t	*fork_key;//
 	pthread_mutex_t	start_line;
 	pthread_mutex_t	voice;
-	int				*fork_status;
-	long			time_to_died;
-	long			time_to_eat;
-	long			time_to_sleep;
-	long			time_to_each_must_eat;
+	int				*fork_status;//
+	long			time_to_died;//
+	long			time_to_eat;//
+	long			time_to_sleep;//
+	long			time_to_each_must_eat;//
 	long			time_to_start;
-	long			num_of_philo;
+	long			num_of_philo;//
 	int				is_someone_dead;
 	int				all_philo_full;
 }	t_union;

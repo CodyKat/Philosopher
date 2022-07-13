@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 01:38:35 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/13 04:17:55 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/13 13:45:30 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	malloc_in_union_resources(t_union *info_union)
 													info_union->num_of_philo);
 	if ((info_union->philo_thread == NULL) || (info_union->fork_key == NULL) || \
 											(info_union->fork_status == NULL))
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }
 
 void	free_memory_in_union(t_union *info_union)
@@ -43,7 +43,7 @@ void	link_all_philo_and_union(t_philo *info_philo_arr, t_union *info_union)
 	philo_count = 0;
 	while (philo_count < info_union->num_of_philo)
 	{
-		info_philo_arr->info_union = info_union;
+		info_philo_arr[philo_count].info_union = info_union;
 		philo_count++;
 	}
 }
@@ -57,7 +57,6 @@ void	init_mutex_and_make_philos(t_philo **info_philo_arr)
 	info_union = (*info_philo_arr)->info_union;
 	num_of_philo = info_union->num_of_philo;
 	philo_count = 0;
-	pthread_mutex_init(info_union->fork_key, NULL);
 	pthread_mutex_init(&info_union->start_line, NULL);
 	pthread_mutex_init(&info_union->voice, NULL);
 	pthread_mutex_lock(&info_union->start_line);
@@ -69,10 +68,11 @@ void	init_mutex_and_make_philos(t_philo **info_philo_arr)
 		info_philo_arr[philo_count]->eat_count = 0;
 		if (philo_count % 2 == 0)
 			pthread_create(&info_union->philo_thread[philo_count], \
-						NULL, philo_even, &info_philo_arr[philo_count]);
+						NULL, philo_even, info_philo_arr[philo_count]);
 		else
 			pthread_create(&info_union->philo_thread[philo_count], \
-						NULL, philo_odd, &info_philo_arr[philo_count]);
+						NULL, philo_odd, info_philo_arr[philo_count]);
 		philo_count++;
 	}
+	pthread_mutex_unlock(&info_union->start_line);
 }
