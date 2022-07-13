@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 00:16:58 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/13 12:48:44 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/13 17:51:06 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int main(int argc, char *argv[])
 			free(info_philo_arr);
 		return (ft_error());
 	}
-	link_all_philo_and_union(info_philo_arr, &info_union);
-	init_mutex_and_make_philos(&info_philo_arr);
+	link_all_philo_to_union(info_philo_arr, &info_union);
+	init_mutex_and_make_philos(info_philo_arr);
 	check_philo_dead(info_philo_arr);
 	wait_philos(&info_union);
 	return (0);

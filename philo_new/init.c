@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 01:38:35 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/13 13:45:30 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:00:58 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_memory_in_union(t_union *info_union)
 		free(info_union->fork_status);
 }
 
-void	link_all_philo_and_union(t_philo *info_philo_arr, t_union *info_union)
+void	link_all_philo_to_union(t_philo *info_philo_arr, t_union *info_union)
 {
 	int	philo_count;
 

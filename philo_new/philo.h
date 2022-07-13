@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 00:17:13 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/13 13:09:29 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:01:45 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@
 
 typedef struct s_union
 {
-	pthread_t		*philo_thread;//
-	pthread_mutex_t	*fork_key;//
+	pthread_t		*philo_thread;
+	pthread_mutex_t	*fork_key;
 	pthread_mutex_t	start_line;
 	pthread_mutex_t	voice;
-	int				*fork_status;//
-	long			time_to_died;//
-	long			time_to_eat;//
-	long			time_to_sleep;//
-	long			time_to_each_must_eat;//
+	int				*fork_status;
+	long			time_to_died;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			time_to_each_must_eat;
 	long			time_to_start;
-	long			num_of_philo;//
+	long			num_of_philo;
 	int				is_someone_dead;
 	int				all_philo_full;
 }	t_union;
@@ -61,7 +61,7 @@ void	ft_print_log(t_philo *info_philo, long time, \
 // init.c
 int	malloc_in_union_resources(t_union *info_union);
 void	free_memory_in_union(t_union *info_union);
-void	link_all_philo_and_union(t_philo *info_philo_arr, t_union *info_union);
+void	link_all_philo_to_union(t_philo *info_philo_arr, t_union *info_union);
 
 // parsing.c
 int	parsing(t_union *info_union, int argc, char **argv);
@@ -71,7 +71,7 @@ long	ft_atol(char *str);
 int	ft_error(void);
 long	get_cur_time(void);
 long	ft_time_diff(long time1, long time2);
-void	init_mutex_and_make_philos(t_philo **info_philo_arr);
+void	init_mutex_and_make_philos(t_philo *info_philo_arr);
 
 // philo.c
 void	*philo_even(void *info_philo);
