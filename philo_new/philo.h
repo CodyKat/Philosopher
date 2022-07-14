@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 00:17:13 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/13 19:01:45 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/13 19:15:32 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_union
 	pthread_mutex_t	*fork_key;
 	pthread_mutex_t	start_line;
 	pthread_mutex_t	voice;
+	pthread_mutex_t	key_of_deadflag_box;
 	int				*fork_status;
 	long			time_to_died;
 	long			time_to_eat;

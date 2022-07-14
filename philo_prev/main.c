@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 04:43:56 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/12 20:34:21 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/13 22:48:40 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,22 @@ void	malloc_in_info(t_union_info *info)
 	size_t	philo_id;
 	size_t	fork_id;
 
-	fork_id = -1;
+	philo_id = -1;
 	info->philo_arr = \
-			(pthread_t *)malloc(sizeof(pthread_t) * info->num_of_philo);
+			(pthread_t **)malloc(sizeof(pthread_t *) * info->num_of_philo);
+	while (++philo_id < info->num_of_philo)
+		info->philo_arr[philo_id] = (pthread_t *)malloc(sizeof(pthread_t));
+	fork_id = -1;
 	info->fork_arr = \
-	(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->num_of_philo);
+	(pthread_mutex_t **)malloc(sizeof(pthread_mutex_t *) * info->num_of_philo);
 	while (++fork_id < info->num_of_philo)
-		pthread_mutex_init(info->fork_arr + fork_id, 0);
+	{
+		info->fork_arr[fork_id] = malloc(sizeof(pthread_mutex_t));
+		pthread_mutex_init(info->fork_arr[fork_id], 0);
+	}
 	pthread_mutex_init(&info->voice, 0);
 	pthread_mutex_init(&info->start_key, 0);
+	pthread_mutex_init(&info->key_of_deadflag_box, 0);
 	info->fork_status = (int *)malloc(sizeof(int) * info->num_of_philo);
 	memset(info->fork_status, 0, sizeof(int) * info->num_of_philo);
 }
@@ -103,6 +110,12 @@ void	philo_is_speaking(t_philo_info *info, size_t time, char *str, int state)
 {
 	if (info->union_info->is_someone_dead == DEAD)
 		return ;
+	if (box_has_dead_flag(info->union_info, GET) && (state != DEAD))
+	{
+		pthread_mutex_unlock(&info->union_info->key_of_deadflag_box);
+		return ;
+	}
+	pthread_mutex_unlock(&info->union_info->key_of_deadflag_box);
 	pthread_mutex_lock(&info->union_info->voice);
 	printf("%zu %zu %s\n", time, info->my_id, str);
 	pthread_mutex_unlock(&info->union_info->voice);
@@ -172,37 +185,57 @@ t_philo_info	*make_philos(t_union_info *union_info)
 	while (++philo_id < union_info->num_of_philo)
 	{
 		if (philo_id % 2 == 0)
-			pthread_create(&union_info->philo_arr[philo_id], NULL, \
+			pthread_create(union_info->philo_arr[philo_id], NULL, \
 							func_even_philo_thread, &philo_info_arr[philo_id]);
 		else
-			pthread_create(&union_info->philo_arr[philo_id], NULL, \
+			pthread_create(union_info->philo_arr[philo_id], NULL, \
 							func_odd_philo_thread, &philo_info_arr[philo_id]);
 	}
 	return (philo_info_arr);
 }
 
-void	watcher(t_philo_info *philo_info, size_t num_of_philo)
+int	box_has_dead_flag(t_union_info *info, int getset_option)
 {
-	size_t			cur_time_in_ms;
-	size_t			time_to_starve;
-	size_t			time_to_die;
-	int				philo_count;
+	pthread_mutex_lock(&info->key_of_deadflag_box);
+	if (getset_option == SET)
+	{
+		info->is_someone_dead = 1;
+		pthread_mutex_unlock(&info->key_of_deadflag_box);
+		return (DEAD);
+	}
+	else
+	{
+		// pthread_mutex_unlock(&info->key_of_deadflag_box);
+		return (info->is_someone_dead);
+	}
+}
 
-	time_to_die = philo_info->union_info->time_to_die;
+void	watcher(t_philo_info **philo_info, size_t num_of_philo)
+{
+	size_t		cur_time_in_ms;
+	size_t		time_to_starve;
+	size_t		time_to_start;
+	size_t		time_to_die;
+	int			philo_count;
+
+	time_to_die = (*philo_info)->union_info->time_to_die;
 	while (1)
 	{
 		philo_count = -1;
 		cur_time_in_ms = ft_time();
+		time_to_start = (*philo_info)->union_info->time_to_start;
 		while (++philo_count < num_of_philo)
 		{
 			time_to_starve = \
-				cur_time_in_ms - (philo_info + philo_count)->time_of_last_meal;
+				cur_time_in_ms - philo_info[philo_count]->time_of_last_meal;
 			if (time_to_starve >= time_to_die)
 			{
-				philo_info->union_info->is_someone_dead = DEAD;
-				philo_is_speaking(philo_info + philo_count, \
-					cur_time_in_ms - philo_info->union_info->time_to_start, \
-					"died", DEAD);
+				(*philo_info)->union_info->is_someone_dead = DEAD;
+				// pthread_mutex_lock(&(*philo_info)->union_info->key_of_deadflag_box);
+				box_has_dead_flag((*philo_info)->union_info, SET);
+				// pthread_mutex_unlock(&(*philo_info)->union_info->key_of_deadflag_box);
+				philo_is_speaking(philo_info[philo_count], \
+							cur_time_in_ms - time_to_start, "died", DEAD);
 				return ;
 			}
 		}
@@ -222,10 +255,11 @@ int	main(int argc, char *argv[])
 		ft_print_error(union_info.errnum);
 	malloc_in_info(&union_info);
 	t_philo_info_arr = make_philos(&union_info);
-	watcher(t_philo_info_arr, union_info.num_of_philo);
+	watcher(&t_philo_info_arr, union_info.num_of_philo);
 	while (++philo_num < union_info.num_of_philo)
-		pthread_join(union_info.philo_arr[philo_num], 0);
+		pthread_join(*union_info.philo_arr[philo_num], 0);
 	// free_all_resource(&union_info);
+
 	return (0);
 }
 
