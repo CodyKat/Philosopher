@@ -2,13 +2,12 @@ CC = cc
 NAME = philo
 CFLAGS = -g# -Wall -Wextra -Werror
 THREAD_FLAGS = -lpthread
-SRCS =	main.c	\
-		philo.c	\
-		util.c	\
-		init.c	\
-		parsing.c	\
-		philo_behave.c
-
+SRCS =	main_bonus.c			\
+		parsing_bonus.c			\
+		philo_behave_bonus.c	\
+		philo_bonus.c			\
+		util_bonus.c			\
+		util2_bonus.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -20,7 +19,7 @@ $(NAME) : ${OBJS}
 %.o:%.c
 	${CC} ${CFLAGS} -o $@ -c $<
 
-clean : 
+clean :
 	rm -f ${OBJS}
 
 fclean : clean

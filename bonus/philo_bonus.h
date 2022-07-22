@@ -1,0 +1,88 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/07/21 18:13:14 by jaemjeon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
+# include <stdio.h>
+# include <unistd.h>
+# include <pthread.h>
+# include <semaphore.h>
+# include <stdlib.h>
+# include <signal.h>
+# include <sys/time.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
+# include <string.h>
+
+# define TRUE 1
+# define FALSE 0
+# define ERROR -1
+# define INT_MAX 2147483647
+# define LOCK 1
+# define UNLOCK 0
+# define NONE 0
+# define LASTSPEAK 1
+# define DEAD 1
+# define FULL 2
+
+typedef struct s_union
+{
+	int				stop_eating;
+	size_t			num_of_philo;
+	size_t			time_to_die;
+	size_t			time_to_eat;
+	size_t			time_to_sleep;
+	size_t			time_to_start;
+	size_t			num_each_philo_must_eat;
+	sem_t			*forks;
+	sem_t			*voice;
+	sem_t			*dead;
+	sem_t			*start_key;
+	sem_t			*full_count;
+	pid_t			*philo_id_arr;
+}	t_union;
+
+typedef struct s_philo
+{
+	size_t	my_id;
+	size_t	time_of_last_meal;
+	int		eat_count;
+	t_union	*info_union;
+}	t_philo;
+
+// main_bonus.c
+
+//parsing_bonus.c
+void	parsing(t_union *info_union, int argc, char **argv);
+
+//philo_behave_bonus.c
+void	philo_is_speaking(t_philo *info_philo, char *message, int flag);
+void	pick_up_forks(t_philo *info_philo);
+void	philo_eat(t_philo *info_philo);
+void	philo_sleep(t_philo *info_philo);
+void	philo_think(t_philo *info_philo);
+
+//util_bonus.c
+size_t	ft_atoul_check_range(char *str);
+void	ft_error(void);
+size_t	get_cur_time(void);
+
+//util2_bonus.c
+int		paras_is_in_valid_range(t_union *info_union, int argc);
+void	check_is_dead(t_philo *info_philo);
+void	*ft_calloc(size_t size);
+size_t	get_time_stamp(t_union *info_union);
+
+//philo_bonus.c
+void	philo_process(t_philo *info_philo);
+
+#endif

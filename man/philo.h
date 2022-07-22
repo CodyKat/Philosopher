@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/19 00:41:41 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/20 21:44:59 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_union
 	pthread_mutex_t	**fork_arr;
 	pthread_mutex_t	voice;
 	pthread_mutex_t	start_key;
-	pthread_mutex_t	key_of_deadflag_box;
 }	t_union;
 
 typedef struct s_philo
@@ -55,27 +54,25 @@ typedef struct s_philo
 	t_union			*info_union;
 }	t_philo;
 
-// main.c
-
 //parsing.c
-int	parsing(t_union *info_union, int argc, char **argv);
+int		parsing(t_union *info_union, int argc, char **argv);
 
 //util.c
-size_t	ft_atoul_check_range(char *str);
 int		ft_error(void);
+size_t	ft_atoul_check_range(char *str);
 size_t	get_cur_time(void);
-size_t	ft_time_diff(size_t time1, size_t time2);
 
 //util2.c
-int	 paras_is_in_valid_range(t_union *info_union, int argc);
+int		paras_is_in_valid_range(t_union *info_union, int argc);
 void	*ft_calloc(size_t size);
 
 //init.c
-int	malloc_all_resources(t_union *info_union, t_philo **info_philo_arr, \
+int		malloc_all_resources(t_union *info_union, t_philo **info_philo_arr, \
 																int n_philo);
+int		malloc_and_init_resources(t_union *info_union, \
+													t_philo **info_philo_arr);
 void	free_all_resources(t_union *info_union, t_philo **info_philo_arr);
 void	init_all_resources(t_union *info_union, t_philo *info_philo_arr);
-int	malloc_and_init_resources(t_union *info_union, t_philo **info_philo_arr);
 
 //philo_func.c
 void	*philo_even(void *info_philo);

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   util_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:06:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/14 00:23:00 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/20 23:47:01 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 static int	is_digit(char *str)
 {
@@ -38,10 +38,10 @@ size_t	ft_atoul_check_range(char *str)
 		return (return_num);
 }
 
-int	ft_error(void)
+void	ft_error(void)
 {
 	write(2, "ERROR\n", 6);
-	return (ERROR);
+	exit(1);
 }
 
 size_t	get_cur_time(void)
@@ -51,12 +51,3 @@ size_t	get_cur_time(void)
 	gettimeofday(&s_time, NULL);
 	return (s_time.tv_sec * 1000 + s_time.tv_usec / 1000);
 }
-
-size_t	ft_time_diff(size_t time1, size_t time2)
-{
-	if (time1 >= time2)
-		return (time1 - time2);
-	else
-		return (time2 - time1);
-}
-

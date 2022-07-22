@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/13 02:04:56 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/13 04:09:50 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/07/14 00:06:32 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/07/20 21:45:34 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	is_digit(char *str)
 	return (('0' <= *str) && (*str <= '9'));
 }
 
-long	ft_atol(char *str)
+size_t	ft_atoul_check_range(char *str)
 {
-	long	return_num;
+	size_t	return_num;
 
 	return_num = 0;
 	while (*str)
@@ -32,7 +32,10 @@ long	ft_atol(char *str)
 			return (ERROR);
 		str++;
 	}
-	return (return_num);
+	if (return_num == 0)
+		return (ERROR);
+	else
+		return (return_num);
 }
 
 int	ft_error(void)
@@ -41,18 +44,10 @@ int	ft_error(void)
 	return (ERROR);
 }
 
-long	get_cur_time(void)
+size_t	get_cur_time(void)
 {
 	struct timeval	s_time;
 
 	gettimeofday(&s_time, NULL);
 	return (s_time.tv_sec * 1000 + s_time.tv_usec / 1000);
-}
-
-long	ft_time_diff(long time1, long time2)
-{
-	if (time1 >= time2)
-		return (time1 - time2);
-	else
-		return (time2 - time1);
 }

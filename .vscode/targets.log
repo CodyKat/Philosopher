@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Wed Jul 13 02:48:50 2022
+# Make data base, printed on Thu Jul 21 03:08:55 2022
 
 # Variables
 
@@ -18,6 +18,8 @@ make: *** No rule to make target `all'.  Stop.
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
@@ -25,11 +27,11 @@ make: *** No rule to make target `all'.  Stop.
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/jaemjeon/42seoul/philo/42seoul_philo
+CURDIR := /Users/jaemjeon/42seoul/philo
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"ko","availableLanguages":{"*":"ko"},"_languagePackId":"09874dd43d51ab3e79ba0dc34dc94813.ko","_translationsConfigFile":"/Users/jaemjeon/Library/Application Support/Code/clp/09874dd43d51ab3e79ba0dc34dc94813.ko/tcf.json","_cacheRoot":"/Users/jaemjeon/Library/Application Support/Code/clp/09874dd43d51ab3e79ba0dc34dc94813.ko","_resolvedLanguagePackCoreLocation":"/Users/jaemjeon/Library/Application Support/Code/clp/09874dd43d51ab3e79ba0dc34dc94813.ko/92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9","_corruptedFile":"/Users/jaemjeon/Library/Application Support/Code/clp/09874dd43d51ab3e79ba0dc34dc94813.ko/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"ko","availableLanguages":{"*":"ko"},"_languagePackId":"2dff5cff996ed6cbe8d8aa8740f86aa0.ko","_translationsConfigFile":"/Users/jaemjeon/Library/Application Support/Code/clp/2dff5cff996ed6cbe8d8aa8740f86aa0.ko/tcf.json","_cacheRoot":"/Users/jaemjeon/Library/Application Support/Code/clp/2dff5cff996ed6cbe8d8aa8740f86aa0.ko","_resolvedLanguagePackCoreLocation":"/Users/jaemjeon/Library/Application Support/Code/clp/2dff5cff996ed6cbe8d8aa8740f86aa0.ko/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a","_corruptedFile":"/Users/jaemjeon/Library/Application Support/Code/clp/2dff5cff996ed6cbe8d8aa8740f86aa0.ko/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
 # makefile
@@ -43,21 +45,25 @@ P9K_SSH = 0
 # environment
 MAIL = jaemjeon@student.42.fr
 # environment
-VSCODE_CWD = /
+VSCODE_CWD = /Users/jaemjeon/42seoul/ft_printf
 # environment
 PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Wireshark.app/Contents/MacOS
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
+LaunchInstanceID = B846FF6D-9F7F-44EC-9BD2-867C0A3C92B7
+# environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.fpXs1zg1pZ/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.kw0etCBcoN/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-PWD = /Users/jaemjeon/42seoul/philo/42seoul_philo
+SQLITE_EXEMPT_PATH_FROM_VNODE_GUARDS = /Users/jaemjeon/Library/WebKit/Databases
+# environment
+PWD = /Users/jaemjeon/42seoul/philo
 # environment
 HOMEBREW_CELLAR = /opt/homebrew/Cellar
 # environment
@@ -66,13 +72,14 @@ ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 MANPATH = /opt/homebrew/share/man::
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
- 
 # environment
 HOME = /Users/jaemjeon
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/jaemjeon/Library/Application Support/Code/CachedData/92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9
+VSCODE_CLI = 1
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/jaemjeon/Library/Application Support/Code/CachedData/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
 # environment
 LOGNAME = jaemjeon
 # environment
@@ -87,24 +94,32 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
 XPC_FLAGS = 0x0
+# environment
+COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
-# default
-MAKECMDGOALS := all
 # environment
-SHLVL = 1
+LC_TERMINAL = iTerm2
+# environment
+SHLVL = 3
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = jaemjeon
 # makefile
 .DEFAULT_GOAL := 
+# default
+MAKECMDGOALS := all
+# environment
+TERM_SESSION_ID = w0t0p1:A2E94CE4-4748-4918-AF27-265F6FCBC686
 # environment
 LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
 MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
+# environment
+TERM_PROGRAM = iTerm.app
 # default
 .VARIABLES := 
 # environment
@@ -112,7 +127,7 @@ TMPDIR = /var/folders/6y/r_plnjts3lz1zwf61_134ssw0000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/jaemjeon/Library/Application Support/Code/1.69.0-main.sock
+VSCODE_IPC_HOOK = /Users/jaemjeon/Library/Application Support/Code/1.69.1-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -122,9 +137,13 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
+TERM_PROGRAM_VERSION = 3.4.16
+# environment
 NVM_DIR = /Users/jaemjeon/.nvm
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.6687571.6687577
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.7088510.7088516.FA231CBE-1081-4905-AFB5-809A6D85680A
+# environment
+LC_TERMINAL_VERSION = 3.4.16
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -132,7 +151,11 @@ HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +F = $(notdir $+)
 # environment
+ITERM_SESSION_ID = w0t0p1:A2E94CE4-4748-4918-AF27-265F6FCBC686
+# environment
 HOMEBREW_REPOSITORY = /opt/homebrew
+# environment
+COLORFGBG = 15;0
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x3:0x33
 # environment
@@ -142,9 +165,15 @@ MAKEFILES :=
 # automatic
 <F = $(notdir $<)
 # environment
+ITERM_PROFILE = Default
+# environment
 PAGER = less
 # environment
 LC_ALL = C
+# environment
+SECURITYSESSIONID = 18985
+# environment
+P9K_TTY = old
 # automatic
 ^F = $(notdir $^)
 # default
@@ -156,11 +185,15 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 75362
+TERM = xterm-256color
+# environment
+_P9K_TTY = /dev/ttys000
+# environment
+VSCODE_PID = 37430
 # environment
 NVM_RC_VERSION = 
 # variable set hash-table stats:
-# Load=72/1024=7%, Rehash=0, Collisions=2/93=2%
+# Load=89/1024=9%, Rehash=0, Collisions=5/110=5%
 
 # Pattern-specific Variable Values
 
@@ -168,7 +201,7 @@ NVM_RC_VERSION =
 
 # Directories
 
-# . (device 16777231, inode 6657244): 6 files, no impossibilities.
+# . (device 16777231, inode 7137076): 6 files, no impossibilities.
 
 # 6 files, no impossibilities in 1 directories.
 
@@ -242,6 +275,6 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Wed Jul 13 02:48:50 2022
+# Finished Make data base on Thu Jul 21 03:08:55 2022
 
  

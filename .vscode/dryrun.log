@@ -1,6 +1,6 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/jaemjeon/42seoul/philo/42seoul_philo'
-make: Leaving directory `/Users/jaemjeon/42seoul/philo/42seoul_philo'
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/jaemjeon/42seoul/philo'
+make: Leaving directory `/Users/jaemjeon/42seoul/philo'
  
 make: *** No targets specified and no makefile found.  Stop.
 

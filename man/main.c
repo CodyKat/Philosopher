@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/18 23:52:02 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/20 21:37:41 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int	check_all_philo_is_full(t_philo *info_philo_arr)
 
 void	watcher(t_philo *info_philo_arr, int argc)
 {
-	int	n_philo;
-	int	num_of_philo;
-	int	each_philo_must_eat;
+	int		n_philo;
+	int		num_of_philo;
+	int		each_philo_must_eat;
 	size_t	time_to_die;
 
 	num_of_philo = info_philo_arr->info_union->num_of_philo;
