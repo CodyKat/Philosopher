@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/21 18:13:14 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/23 02:36:51 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_union
 	size_t			time_to_sleep;
 	size_t			time_to_start;
 	size_t			num_each_philo_must_eat;
-	sem_t			*forks;
+	sem_t			*forks_set;
 	sem_t			*voice;
 	sem_t			*dead;
 	sem_t			*start_key;
