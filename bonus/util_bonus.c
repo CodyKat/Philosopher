@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:06:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/20 23:47:01 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/27 04:31:26 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,9 @@ size_t	get_cur_time(void)
 
 	gettimeofday(&s_time, NULL);
 	return (s_time.tv_sec * 1000 + s_time.tv_usec / 1000);
+}
+
+size_t	get_time_stamp(t_philo *info_philo)
+{
+	return (get_cur_time() - info_philo->time_to_start);
 }

@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:24:35 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/21 04:09:48 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/27 04:33:43 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ int	paras_is_in_valid_range(t_union *info_union, int argc)
 
 void	check_is_dead(t_philo *info_philo)
 {
-	if (info_philo->info_union->time_to_die >= \
+	if (info_philo->info_union->time_to_die <= \
 							get_cur_time() - info_philo->time_of_last_meal)
+	{
+		sem_wait(info_philo->info_union->dead);
 		exit(DEAD);
+	}
 }
 
 void	*ft_calloc(size_t size)
@@ -44,7 +47,18 @@ void	*ft_calloc(size_t size)
 	return (p_mem);
 }
 
-size_t	get_time_stamp(t_union *info_union)
+int	is_odd_philo(size_t id)
 {
-	return (get_cur_time() - info_union->time_to_start);
+	if (id % 4 == 2)
+		return (TRUE);
+	else
+		return (FALSE);
+}
+
+int	is_even_philo(size_t id)
+{
+	if (id % 4 == 0)
+		return (TRUE);
+	else
+		return (FALSE);
 }

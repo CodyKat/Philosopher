@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/23 02:36:51 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/27 05:39:18 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define LASTSPEAK 1
 # define DEAD 1
 # define FULL 2
+# define LLONG_MAX 9223372036854775807
 
 typedef struct s_union
 {
@@ -48,14 +49,16 @@ typedef struct s_union
 	sem_t			*dead;
 	sem_t			*start_key;
 	sem_t			*full_count;
-	pid_t			*philo_id_arr;
+	pid_t			*philo_pid_arr;
 }	t_union;
 
 typedef struct s_philo
 {
 	size_t	my_id;
 	size_t	time_of_last_meal;
+	size_t	time_to_start;
 	int		eat_count;
+	pthread_mutex_t	mutex_time_of_last_meal;
 	t_union	*info_union;
 }	t_philo;
 
@@ -65,7 +68,7 @@ typedef struct s_philo
 void	parsing(t_union *info_union, int argc, char **argv);
 
 //philo_behave_bonus.c
-void	philo_is_speaking(t_philo *info_philo, char *message, int flag);
+void	philo_is_speaking(t_philo *info_philo, char *message);
 void	pick_up_forks(t_philo *info_philo);
 void	philo_eat(t_philo *info_philo);
 void	philo_sleep(t_philo *info_philo);
@@ -75,12 +78,14 @@ void	philo_think(t_philo *info_philo);
 size_t	ft_atoul_check_range(char *str);
 void	ft_error(void);
 size_t	get_cur_time(void);
+size_t	get_time_stamp(t_philo *info_philo);
 
 //util2_bonus.c
 int		paras_is_in_valid_range(t_union *info_union, int argc);
 void	check_is_dead(t_philo *info_philo);
 void	*ft_calloc(size_t size);
-size_t	get_time_stamp(t_union *info_union);
+int		is_odd_philo(size_t id);
+int		is_even_philo(size_t id);
 
 //philo_bonus.c
 void	philo_process(t_philo *info_philo);
