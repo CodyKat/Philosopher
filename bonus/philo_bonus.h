@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/27 05:39:18 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:49:55 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,17 @@ typedef struct s_union
 	sem_t			*voice;
 	sem_t			*dead;
 	sem_t			*start_key;
-	sem_t			*full_count;
 	pid_t			*philo_pid_arr;
 }	t_union;
 
 typedef struct s_philo
 {
-	size_t	my_id;
-	size_t	time_of_last_meal;
-	size_t	time_to_start;
-	int		eat_count;
+	size_t			my_id;
+	size_t			time_of_last_meal;
+	size_t			time_to_start;
+	int				eat_count;
 	pthread_mutex_t	mutex_time_of_last_meal;
-	t_union	*info_union;
+	t_union			*info_union;
 }	t_philo;
 
 // main_bonus.c

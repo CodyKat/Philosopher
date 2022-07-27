@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/27 05:37:25 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:49:55 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	make_philos(t_union *info_union, t_philo *info_philo)
 		ft_error();
 	sem_wait(info_union->start_key);
 	info_union->time_to_start = get_cur_time();
-	while (++count_philo < info_union->num_of_philo * 2)
+	while (++count_philo < info_union->num_of_philo)
 	{
 		pid = fork();
 		info_union->philo_pid_arr[count_philo] = pid;
 		if (pid == 0)
 		{
-				info_philo->my_id = count_philo / 2;
+			info_philo->my_id = count_philo / 2;
 			if (count_philo % 2 == 0)
 				philo_process(info_philo);
 			else
@@ -53,7 +53,6 @@ void	init(t_union *info_union, t_philo *info_philo)
 	sem_unlink("dead");
 	sem_unlink("start_key");
 	sem_unlink("forks_set");
-	sem_unlink("full_count");
 	info_union->voice = sem_open("voice", O_CREAT, 0644, 1);
 	info_union->dead = sem_open("dead", O_CREAT, 0644, 1);
 	info_union->start_key = sem_open("start_key", O_CREAT, 0644, 1);
@@ -67,7 +66,7 @@ void	kill_all_philos(t_union *info_union)
 	int	count_philo;
 
 	count_philo = -1;
-	while (++count_philo < info_union->num_of_philo * 2)
+	while (++count_philo < info_union->num_of_philo)
 		kill(info_union->philo_pid_arr[count_philo], SIGKILL);
 }
 
@@ -87,7 +86,6 @@ void	wait_for_philos(t_union *info_union)
 		}
 		else
 		{
-			printf("exitstatus : %d\n", WEXITSTATUS(status));
 			if (++full_philo_count == info_union->num_of_philo)
 				break ;
 		}
@@ -107,14 +105,11 @@ int	main(int argc, char *argv[])
 	parsing(&info_union, argc, argv);
 	info_union.forks_set = sem_open("forks_set", O_CREAT, 0644, \
 												info_union.num_of_philo / 2);
-	info_union.full_count = sem_open("full_count", O_CREAT, 0644, \
-												info_union.full_count);
 	make_philos(&info_union, &info_philo_arr);
 	wait_for_philos(&info_union);
 	sem_close(info_union.forks_set);
 	sem_close(info_union.voice);
 	sem_close(info_union.dead);
 	sem_close(info_union.start_key);
-	sem_close(info_union.full_count);
 	exit(0);
 }

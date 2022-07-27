@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_behave_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 00:38:05 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/27 05:40:31 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:39:44 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,10 @@ void	philo_eat(t_philo *info_philo)
 	while (get_cur_time() < time_to_finish_eat)
 		usleep(300);
 	info_philo->eat_count++;
+	sem_post(info_philo->info_union->forks_set);
 	if (info_philo->eat_count == \
 							info_philo->info_union->num_each_philo_must_eat)
-		kill(info_philo->info_union->philo_pid_arr[info_philo->my_id * 2 + 1],\
-				SIGKILL);
-	sem_post(info_philo->info_union->forks_set);
+		exit(FULL);
 }
 
 void	philo_sleep(t_philo *info_philo)
