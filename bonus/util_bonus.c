@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:06:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/27 04:31:26 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/27 21:30:13 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ size_t	get_cur_time(void)
 	return (s_time.tv_sec * 1000 + s_time.tv_usec / 1000);
 }
 
-size_t	get_time_stamp(t_philo *info_philo)
+size_t	get_time_stamp(t_union *info_union)
 {
-	return (get_cur_time() - info_philo->time_to_start);
+	return (get_cur_time() - info_union->time_to_start);
 }

@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:03:13 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/27 17:42:08 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/27 21:27:33 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	parsing(t_union *info_union, int argc, char **argv)
 			ft_error();
 		info_union->philo_pid_arr = \
 					(pid_t *)malloc(sizeof(int) * info_union->num_of_philo);
+		if (info_union->philo_pid_arr == NULL)
+			ft_error();
 		return ;
 	}
 	ft_error();

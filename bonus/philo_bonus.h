@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/27 17:49:55 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/27 21:34:56 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_philo
 {
 	size_t			my_id;
 	size_t			time_of_last_meal;
-	size_t			time_to_start;
 	int				eat_count;
 	pthread_mutex_t	mutex_time_of_last_meal;
 	t_union			*info_union;
@@ -77,7 +76,7 @@ void	philo_think(t_philo *info_philo);
 size_t	ft_atoul_check_range(char *str);
 void	ft_error(void);
 size_t	get_cur_time(void);
-size_t	get_time_stamp(t_philo *info_philo);
+size_t	get_time_stamp(t_union *info_union);
 
 //util2_bonus.c
 int		paras_is_in_valid_range(t_union *info_union, int argc);

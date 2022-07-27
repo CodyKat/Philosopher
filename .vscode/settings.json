@@ -4,5 +4,8 @@
     "editor.insertSpaces": false,
     "editor.renderWhitespace": "all",
     "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "files.associations": {
+        "philo_bonus.h": "c"
+    }
 }

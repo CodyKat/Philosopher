@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 00:38:05 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/27 17:39:44 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/27 22:43:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	philo_is_speaking(t_philo *info_philo, char *message)
 	sem_wait(info_philo->info_union->dead);
 	sem_post(info_philo->info_union->dead);
 	printf("%zu %zu %s\n", \
-				get_time_stamp(info_philo), info_philo->my_id, message);
+		get_time_stamp(info_philo->info_union), info_philo->my_id, message);
 	sem_post(info_philo->info_union->voice);
 }
 
@@ -45,7 +45,10 @@ void	philo_eat(t_philo *info_philo)
 	sem_post(info_philo->info_union->forks_set);
 	if (info_philo->eat_count == \
 							info_philo->info_union->num_each_philo_must_eat)
+	{
+		philo_is_speaking(info_philo, "is full");
 		exit(FULL);
+	}
 }
 
 void	philo_sleep(t_philo *info_philo)
