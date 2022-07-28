@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/27 21:34:56 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/28 19:12:00 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_union
 	size_t			num_each_philo_must_eat;
 	sem_t			*forks_set;
 	sem_t			*voice;
-	sem_t			*dead;
 	sem_t			*start_key;
 	pid_t			*philo_pid_arr;
 }	t_union;
@@ -74,16 +73,13 @@ void	philo_think(t_philo *info_philo);
 
 //util_bonus.c
 size_t	ft_atoul_check_range(char *str);
-void	ft_error(void);
+void	ft_error(t_union *info_union);
 size_t	get_cur_time(void);
 size_t	get_time_stamp(t_union *info_union);
 
 //util2_bonus.c
 int		paras_is_in_valid_range(t_union *info_union, int argc);
-void	check_is_dead(t_philo *info_philo);
 void	*ft_calloc(size_t size);
-int		is_odd_philo(size_t id);
-int		is_even_philo(size_t id);
 
 //philo_bonus.c
 void	philo_process(t_philo *info_philo);
