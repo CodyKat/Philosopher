@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:31:09 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/27 17:15:34 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:33:27 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	*philo_even(void *info_philo)
 	my_info = (t_philo *)info_philo;
 	pthread_mutex_lock(&my_info->info_union->start_key);
 	pthread_mutex_unlock(&my_info->info_union->start_key);
-	usleep(1000);
 	while (my_info->info_union->stop_eating == FALSE)
 	{
 		get_my_left_fork(my_info);
@@ -27,7 +26,6 @@ void	*philo_even(void *info_philo)
 		philo_eat(my_info);
 		philo_sleep(my_info);
 		philo_think(my_info);
-		usleep(300);
 	}
 	return (NULL);
 }
@@ -39,6 +37,7 @@ void	*philo_odd(void *info_philo)
 	my_info = (t_philo *)info_philo;
 	pthread_mutex_lock(&my_info->info_union->start_key);
 	pthread_mutex_unlock(&my_info->info_union->start_key);
+	usleep(1000);
 	while (my_info->info_union->stop_eating == FALSE)
 	{
 		get_my_right_fork(my_info);
@@ -46,6 +45,7 @@ void	*philo_odd(void *info_philo)
 		philo_eat(my_info);
 		philo_sleep(my_info);
 		philo_think(my_info);
+		usleep(300);
 	}
 	return (NULL);
 }

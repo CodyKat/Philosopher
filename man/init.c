@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:18:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/20 21:32:01 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:49:27 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,27 @@ int	malloc_all_resources(t_union *info_union, t_philo **info_philo_arr, \
 
 void	free_all_resources(t_union *info_union, t_philo **info_philo_arr)
 {
-	return ;
+	int	index;
+	int	num_of_philo;
+
+	num_of_philo = info_union->num_of_philo;
+	index = -1;
+	if (info_union->fork_status != NULL)
+		free(info_union->fork_status);
+	if (*info_philo_arr != NULL)
+		free(*info_philo_arr);
+	if (info_union->philo_arr != NULL)
+	{
+		while (info_union->philo_arr[++index] && (index < num_of_philo))
+			free(info_union->philo_arr[index]);
+		free(info_union->philo_arr);
+	}
+	if (info_union->fork_arr != NULL)
+	{
+		while (info_union->fork_arr[++index] && (index < num_of_philo))
+			free(info_union->fork_arr[index]);
+		free(info_union->fork_arr);
+	}
 }
 
 void	init_all_resources(t_union *info_union, t_philo *info_philo_arr)
@@ -53,7 +73,7 @@ void	init_all_resources(t_union *info_union, t_philo *info_philo_arr)
 	philo_count = -1;
 	while (++philo_count < info_union->num_of_philo)
 	{
-		info_philo_arr[philo_count].my_id = philo_count;
+		info_philo_arr[philo_count].my_id = philo_count + 1;
 		info_philo_arr[philo_count].right_fork_id = \
 								(philo_count + 1) % info_union->num_of_philo;
 		info_philo_arr[philo_count].left_fork_id = philo_count;

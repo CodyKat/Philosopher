@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/20 21:44:59 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:11:50 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ void	*philo_even(void *info_philo);
 void	*philo_odd(void *info_philo);
 
 //philo_behave.c
-void	philo_is_speaking(t_philo *philo_info, size_t philo_id, \
-													char *message, int flag);
+void	philo_is_speaking(t_philo *philo_info, size_t philo_id, char *message);
 void	get_my_left_fork(t_philo *my_info);
 void	get_my_right_fork(t_philo *my_info);
 void	philo_eat(t_philo *my_info);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/20 21:37:41 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:50:48 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	make_philos(t_union *info_union, t_philo *info_philo_arr)
 	while (++n_philo < info_union->num_of_philo)
 	{
 		info_philo_arr[n_philo].time_of_last_meal = info_union->time_to_start;
-		if (n_philo % 2 == 0)
+		if (n_philo % 2 == 1)
 			pthread_create(info_union->philo_arr[n_philo], NULL, philo_even, \
 												&info_philo_arr[n_philo]);
 		else
@@ -48,8 +48,9 @@ int	check_is_someone_dead(t_philo *info_philo_arr)
 									info_philo_arr[n_philo].time_of_last_meal;
 		if (time_to_starve >= time_to_die)
 		{
-			philo_is_speaking(&info_philo_arr[n_philo], n_philo, \
-														"is die", LASTSPEAK);
+			pthread_mutex_lock(&info_philo_arr->info_union->voice);
+			printf("%zu %d is die\n", get_cur_time() - \
+				info_philo_arr->info_union->time_to_start, n_philo);
 			return (TRUE);
 		}
 	}
@@ -70,7 +71,9 @@ int	check_all_philo_is_full(t_philo *info_philo_arr)
 		if (info_philo_arr[n_philo].eat_count < num_philo_must_eat)
 			return (FALSE);
 	}
-	philo_is_speaking(info_philo_arr, 0, "\b\ball philo is full", LASTSPEAK);
+	pthread_mutex_lock(&info_philo_arr->info_union->voice);
+	printf("%zu all philo is full\n", \
+		get_cur_time() - info_philo_arr->info_union->time_to_start);
 	return (TRUE);
 }
 
@@ -88,15 +91,14 @@ void	watcher(t_philo *info_philo_arr, int argc)
 	{
 		if (check_is_someone_dead(info_philo_arr) == TRUE)
 			break ;
-		if (argc == 6)
-		{
-			if (check_all_philo_is_full(info_philo_arr) == TRUE)
-				break ;
-		}
+		if (argc == 6 && check_all_philo_is_full(info_philo_arr) == TRUE)
+			break ;
 	}
+	info_philo_arr->info_union->stop_eating = TRUE;
+	pthread_mutex_unlock(&info_philo_arr->info_union->voice);
 	n_philo = -1;
 	while (++n_philo < info_philo_arr->info_union->num_of_philo)
-		pthread_detach(*info_philo_arr->info_union->philo_arr[n_philo]);
+		pthread_join(*info_philo_arr->info_union->philo_arr[n_philo], NULL);
 }
 
 int	main(int argc, char *argv[])
