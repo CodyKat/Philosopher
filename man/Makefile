@@ -9,7 +9,8 @@ SRCS =	main.c	\
 		init.c		\
 		philo_func.c	\
 		philo_behave.c	\
-		philo_thinking.c
+		philo_thinking.c	\
+		watcher_func.c
 
 OBJS = ${SRCS:.c=.o}
 

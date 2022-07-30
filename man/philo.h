@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/28 17:11:50 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/30 18:06:02 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ typedef struct s_philo
 	t_union			*info_union;
 }	t_philo;
 
+//main.c
+int		check_is_someone_dead(t_philo *info_philo_arr);
+int		check_all_philo_is_full(t_philo *info_philo_arr);
+
 //parsing.c
 int		parsing(t_union *info_union, int argc, char **argv);
 
@@ -87,5 +91,9 @@ void	philo_sleep(t_philo *my_info);
 
 //philo_thinking.c
 void	philo_think(t_philo *my_info);
+
+//watcher_func.c
+void	watcher_no_optional(t_philo *info_philo_arr);
+void	watcher_optional(t_philo *info_philo_arr);
 
 #endif
