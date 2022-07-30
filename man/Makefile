@@ -1,6 +1,6 @@
 CC = cc
 NAME = philo
-CFLAGS = -g# -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 THREAD_FLAGS = -lpthread
 SRCS =	main.c	\
 		parsing.c	\

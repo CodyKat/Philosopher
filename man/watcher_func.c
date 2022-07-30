@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 17:57:30 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/30 18:03:17 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/30 21:04:49 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	watcher_no_optional(t_philo *info_philo_arr)
 	info_philo_arr->info_union->stop_eating = TRUE;
 	pthread_mutex_unlock(&info_philo_arr->info_union->voice);
 	n_philo = -1;
-	while (++n_philo < info_philo_arr->info_union->num_of_philo)
+	while (++n_philo < (int)info_philo_arr->info_union->num_of_philo)
 		pthread_join(*info_philo_arr->info_union->philo_arr[n_philo], NULL);
 }
 
@@ -49,6 +49,6 @@ void	watcher_optional(t_philo *info_philo_arr)
 	info_philo_arr->info_union->stop_eating = TRUE;
 	pthread_mutex_unlock(&info_philo_arr->info_union->voice);
 	n_philo = -1;
-	while (++n_philo < info_philo_arr->info_union->num_of_philo)
+	while (++n_philo < (int)info_philo_arr->info_union->num_of_philo)
 		pthread_join(*info_philo_arr->info_union->philo_arr[n_philo], NULL);
 }

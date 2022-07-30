@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 23:37:50 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/28 19:33:09 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:42:26 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 void	philo_odd_loop(t_philo *info_philo)
 {
+	void	(*philo_eat)(t_philo *);
+
+	if (info_philo->info_union->has_optional_arg == TRUE)
+		philo_eat = philo_eat_with_option;
+	else
+		philo_eat = philo_eat_with_no_option;
 	usleep(1000);
 	while (1)
 	{
@@ -27,6 +33,12 @@ void	philo_odd_loop(t_philo *info_philo)
 
 void	philo_even_loop(t_philo *info_philo)
 {
+	void	(*philo_eat)(t_philo *);
+
+	if (info_philo->info_union->has_optional_arg == TRUE)
+		philo_eat = philo_eat_with_option;
+	else
+		philo_eat = philo_eat_with_no_option;
 	while (1)
 	{
 		pick_up_forks(info_philo);

@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/28 19:12:00 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:28:21 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 typedef struct s_union
 {
 	int				stop_eating;
+	int				has_optional_arg;
 	size_t			num_of_philo;
 	size_t			time_to_die;
 	size_t			time_to_eat;
@@ -83,5 +84,9 @@ void	*ft_calloc(size_t size);
 
 //philo_bonus.c
 void	philo_process(t_philo *info_philo);
+
+//philo_eat_func.c
+void	philo_eat_with_no_option(t_philo *info_philo);
+void	philo_eat_with_option(t_philo *info_philo);
 
 #endif

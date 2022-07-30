@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 00:38:05 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/28 19:09:10 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:33:06 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,6 @@ void	pick_up_forks(t_philo *info_philo)
 	philo_is_speaking(info_philo, "has taken a fork");
 }
 
-void	philo_eat(t_philo *info_philo)
-{
-	size_t	time_to_finish_eat;
-
-	pthread_mutex_lock(&info_philo->mutex_time_of_last_meal);
-	info_philo->time_of_last_meal = get_cur_time();
-	pthread_mutex_unlock(&info_philo->mutex_time_of_last_meal);
-	time_to_finish_eat = \
-			info_philo->time_of_last_meal + info_philo->info_union->time_to_eat;
-	philo_is_speaking(info_philo, "is eating");
-	while (get_cur_time() < time_to_finish_eat)
-		usleep(300);
-	info_philo->eat_count++;
-	sem_post(info_philo->info_union->forks_set);
-	if (info_philo->eat_count == \
-							info_philo->info_union->num_each_philo_must_eat)
-	{
-		sem_wait(info_philo->info_union->voice);
-		philo_is_speaking(info_philo, "is full");
-		exit(FULL);
-	}
-}
 
 void	philo_sleep(t_philo *info_philo)
 {

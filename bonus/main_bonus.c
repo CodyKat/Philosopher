@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/28 19:26:40 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/30 20:59:34 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	make_philos(t_union *info_union, t_philo *info_philo)
 	info_union->time_to_start = get_cur_time() + 100;
 	info_philo->time_of_last_meal = info_union->time_to_start;
 	sem_wait(info_union->start_key);
-	while (++count_philo < info_union->num_of_philo)
+	while (++count_philo < (int)info_union->num_of_philo)
 	{
 		pid = fork();
 		if (pid == 0)
@@ -33,7 +33,8 @@ void	make_philos(t_union *info_union, t_philo *info_philo)
 		info_union->philo_pid_arr[count_philo] = pid;
 	}
 	while (info_union->time_to_start > get_cur_time())
-		usleep(1);
+	{
+	}
 	sem_post(info_union->start_key);
 }
 
@@ -56,7 +57,7 @@ void	kill_all_philos(t_union *info_union)
 	int	count_philo;
 
 	count_philo = -1;
-	while (++count_philo < info_union->num_of_philo)
+	while (++count_philo < (int)info_union->num_of_philo)
 		kill(info_union->philo_pid_arr[count_philo], SIGKILL);
 }
 
@@ -74,9 +75,10 @@ void	wait_for_philos(t_union *info_union)
 			kill_all_philos(info_union);
 			return ;
 		}
-		else if (++full_philo_count == info_union->num_of_philo)
+		else if (++full_philo_count == (int)info_union->num_of_philo)
 		{
 			printf("all philo is full\n");
+			kill_all_philos(info_union);
 			return ;
 		}
 	}
@@ -86,7 +88,6 @@ int	main(int argc, char *argv[])
 {
 	t_union	info_union;
 	t_philo	info_philo;
-	int		n_philo;
 
 	init(&info_union, &info_philo);
 	parsing(&info_union, argc, argv);
@@ -94,6 +95,10 @@ int	main(int argc, char *argv[])
 												info_union.num_of_philo / 2);
 	if (info_union.forks_set == SEM_FAILED)
 		ft_error(&info_union);
+	if (argc == 6)
+		info_union.has_optional_arg = TRUE;
+	else
+		info_union.has_optional_arg = FALSE;
 	make_philos(&info_union, &info_philo);
 	wait_for_philos(&info_union);
 	sem_close(info_union.forks_set);

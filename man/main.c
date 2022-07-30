@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/30 18:04:34 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/30 21:04:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	make_philos(t_union *info_union, t_philo *info_philo_arr)
 	n_philo = -1;
 	pthread_mutex_lock(&info_union->start_key);
 	info_union->time_to_start = get_cur_time();
-	while (++n_philo < info_union->num_of_philo)
+	while (++n_philo < (int)info_union->num_of_philo)
 	{
 		info_philo_arr[n_philo].time_of_last_meal = info_union->time_to_start;
 		if (n_philo % 2 == 1)
@@ -81,7 +81,6 @@ int	main(int argc, char *argv[])
 {
 	t_union	info_union;
 	t_philo	*info_philo_arr;
-	int		n_philo;
 	void	(*watcher)(t_philo *);
 
 	memset(&info_union, 0, sizeof(t_union));

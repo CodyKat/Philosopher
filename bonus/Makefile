@@ -1,13 +1,14 @@
 CC = cc
 NAME = philo
-CFLAGS = -g# -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 THREAD_FLAGS = -lpthread
 SRCS =	main_bonus.c			\
 		parsing_bonus.c			\
 		philo_behave_bonus.c	\
 		philo_bonus.c			\
 		util_bonus.c			\
-		util2_bonus.c
+		util2_bonus.c			\
+		philo_eat_func.c
 
 OBJS = ${SRCS:.c=.o}
 
