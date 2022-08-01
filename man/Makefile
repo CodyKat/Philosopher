@@ -1,7 +1,6 @@
 CC = cc
 NAME = philo
 CFLAGS = -Wall -Wextra -Werror
-THREAD_FLAGS = -lpthread
 SRCS =	main.c	\
 		parsing.c	\
 		util.c		\
@@ -17,7 +16,7 @@ OBJS = ${SRCS:.c=.o}
 all : ${NAME}
 
 $(NAME) : ${OBJS}
-	${CC} -o ${NAME} ${THREAD_FLAGS} ${CFLAGS} ${OBJS}
+	${CC} -o ${NAME} ${CFLAGS} ${OBJS}
 
 %.o:%.c
 	${CC} ${CFLAGS} -o $@ -c $<
