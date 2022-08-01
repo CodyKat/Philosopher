@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/01 16:11:10 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/01 23:57:23 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ size_t	get_cur_time(void);
 int		paras_is_in_valid_range(t_union *info_union, int argc);
 void	*ft_calloc(size_t size);
 void	error_in_making_philo(t_union *info_union, t_philo **info_philo_arr);
+void	destroy_all_mutex(t_union *info_union);
 
 //init.c
 int		malloc_all_resources(t_union *info_union, t_philo **info_philo_arr, \
