@@ -1,6 +1,6 @@
 CC = cc
 NAME = philo
-CFLAGS = -g # -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SRCS =	main_bonus.c			\
 		parsing_bonus.c			\
 		philo_behave_bonus.c	\
