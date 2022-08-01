@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/30 19:28:21 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:12:29 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@
 # define LOCK 1
 # define UNLOCK 0
 # define NONE 0
-# define LASTSPEAK 1
 # define DEAD 1
 # define FULL 2
-# define LLONG_MAX 9223372036854775807
 
 typedef struct s_union
 {
@@ -61,9 +59,11 @@ typedef struct s_philo
 }	t_philo;
 
 // main_bonus.c
+void	kill_all_philos(t_union *info_union);
 
 //parsing_bonus.c
 void	parsing(t_union *info_union, int argc, char **argv);
+void	init_after_parsing(t_union *info_union, int argc);
 
 //philo_behave_bonus.c
 void	philo_is_speaking(t_philo *info_philo, char *message);
@@ -79,8 +79,10 @@ size_t	get_cur_time(void);
 size_t	get_time_stamp(t_union *info_union);
 
 //util2_bonus.c
-int		paras_is_in_valid_range(t_union *info_union, int argc);
+int		paras_is_in_valid_range(t_union *info_union);
 void	*ft_calloc(size_t size);
+void	ft_fork_error(t_union *info_union);
+int		ft_wexitstatus(int status);
 
 //philo_bonus.c
 void	philo_process(t_philo *info_philo);

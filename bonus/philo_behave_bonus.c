@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 00:38:05 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/30 19:33:06 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/30 21:10:43 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	pick_up_forks(t_philo *info_philo)
 	philo_is_speaking(info_philo, "has taken a fork");
 	philo_is_speaking(info_philo, "has taken a fork");
 }
-
 
 void	philo_sleep(t_philo *info_philo)
 {

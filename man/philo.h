@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/30 18:06:02 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/31 16:54:23 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 # define INT_MAX 2147483647
 # define LOCK 1
 # define UNLOCK 0
-# define NONE 0
-# define LASTSPEAK 1
 
 typedef struct s_union
 {
