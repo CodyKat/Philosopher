@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/01 15:43:14 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/01 16:10:57 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,7 @@ int	main(int argc, char *argv[])
 		watcher = watcher_no_optional;
 	if (make_philos(&info_union, info_philo_arr) == ERROR)
 	{
-		free_all_resources(&info_union, &info_philo_arr);
-		ft_error();
+		error_in_making_philo(&info_union, &info_philo_arr);
 		return (0);
 	}
 	watcher(info_philo_arr);

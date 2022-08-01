@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:24:35 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/20 21:39:09 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/01 16:11:30 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,17 @@ void	*ft_calloc(size_t size)
 	if (p_mem != NULL)
 		memset(p_mem, 0, size);
 	return (p_mem);
+}
+
+void	error_in_making_philo(t_union *info_union, t_philo **info_philo_arr)
+{
+	int	n_philo;
+
+	n_philo = -1;
+	free_all_resources(info_union, info_philo_arr);
+	while (++n_philo < (int)info_union->num_of_philo)
+		pthread_mutex_destroy(info_union->fork_arr[n_philo]);
+	pthread_mutex_destroy(&info_union->voice);
+	pthread_mutex_destroy(&info_union->start_key);
+	ft_error();
 }
