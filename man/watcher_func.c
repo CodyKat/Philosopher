@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 17:57:30 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/01 15:44:22 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/01 16:52:55 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	watcher_no_optional(t_philo *info_philo_arr)
 
 	while (check_is_someone_dead(info_philo_arr) == FALSE)
 	{
+		usleep(500);
 	}
 	info_philo_arr->info_union->stop_eating = TRUE;
 	pthread_mutex_unlock(&info_philo_arr->info_union->voice);
@@ -33,6 +34,7 @@ void	watcher_optional(t_philo *info_philo_arr)
 	while (check_is_someone_dead(info_philo_arr) == FALSE \
 			&& check_all_philo_is_full(info_philo_arr) == FALSE)
 	{
+		usleep(500);
 	}
 	info_philo_arr->info_union->stop_eating = TRUE;
 	pthread_mutex_unlock(&info_philo_arr->info_union->voice);
