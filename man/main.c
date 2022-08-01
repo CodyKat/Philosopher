@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/30 21:04:22 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:43:14 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	make_philos(t_union *info_union, t_philo *info_philo_arr)
+int	make_philos(t_union *info_union, t_philo *info_philo_arr)
 {
 	int		n_philo;
+	int		philo_create_status;
 
 	n_philo = -1;
 	pthread_mutex_lock(&info_union->start_key);
@@ -23,13 +24,18 @@ void	make_philos(t_union *info_union, t_philo *info_philo_arr)
 	{
 		info_philo_arr[n_philo].time_of_last_meal = info_union->time_to_start;
 		if (n_philo % 2 == 1)
-			pthread_create(info_union->philo_arr[n_philo], NULL, philo_even, \
-												&info_philo_arr[n_philo]);
+			philo_create_status = \
+				pthread_create(info_union->philo_arr[n_philo], NULL, \
+										philo_even, &info_philo_arr[n_philo]);
 		else
-			pthread_create(info_union->philo_arr[n_philo], NULL, philo_odd, \
-												&info_philo_arr[n_philo]);
+			philo_create_status = \
+				pthread_create(info_union->philo_arr[n_philo], NULL, \
+										philo_odd, &info_philo_arr[n_philo]);
+		if (philo_create_status == -1)
+			return (ERROR);
 	}
 	pthread_mutex_unlock(&info_union->start_key);
+	return (TRUE);
 }
 
 int	check_is_someone_dead(t_philo *info_philo_arr)
@@ -92,7 +98,12 @@ int	main(int argc, char *argv[])
 		watcher = watcher_optional;
 	else
 		watcher = watcher_no_optional;
-	make_philos(&info_union, info_philo_arr);
+	if (make_philos(&info_union, info_philo_arr) == ERROR)
+	{
+		free_all_resources(&info_union, &info_philo_arr);
+		ft_error();
+		return (0);
+	}
 	watcher(info_philo_arr);
 	return (0);
 }

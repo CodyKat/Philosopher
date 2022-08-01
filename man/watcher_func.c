@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   watcher_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 17:57:30 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/30 21:04:49 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:44:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,7 @@
 void	watcher_no_optional(t_philo *info_philo_arr)
 {
 	int		n_philo;
-	int		num_of_philo;
-	int		each_philo_must_eat;
-	size_t	time_to_die;
 
-	num_of_philo = info_philo_arr->info_union->num_of_philo;
-	each_philo_must_eat = info_philo_arr->info_union->num_each_philo_must_eat;
-	time_to_die = info_philo_arr->info_union->time_to_die;
 	while (check_is_someone_dead(info_philo_arr) == FALSE)
 	{
 	}
@@ -35,13 +29,7 @@ void	watcher_no_optional(t_philo *info_philo_arr)
 void	watcher_optional(t_philo *info_philo_arr)
 {
 	int		n_philo;
-	int		num_of_philo;
-	int		each_philo_must_eat;
-	size_t	time_to_die;
 
-	num_of_philo = info_philo_arr->info_union->num_of_philo;
-	each_philo_must_eat = info_philo_arr->info_union->num_each_philo_must_eat;
-	time_to_die = info_philo_arr->info_union->time_to_die;
 	while (check_is_someone_dead(info_philo_arr) == FALSE \
 			&& check_all_philo_is_full(info_philo_arr) == FALSE)
 	{
