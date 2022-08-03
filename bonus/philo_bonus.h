@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/31 18:12:29 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/03 16:19:30 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int		paras_is_in_valid_range(t_union *info_union);
 void	*ft_calloc(size_t size);
 void	ft_fork_error(t_union *info_union);
 int		ft_wexitstatus(int status);
+int		is_dead(t_philo *info_philo);
 
 //philo_bonus.c
 void	philo_process(t_philo *info_philo);
