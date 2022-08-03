@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:48:22 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/28 17:19:04 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/03 15:21:31 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 void	philo_is_speaking(t_philo *philo_info, size_t philo_id, char *message)
 {
-	size_t	time_stamp;
-
 	pthread_mutex_lock(&philo_info->info_union->voice);
 	if (philo_info->info_union->stop_eating == TRUE)
 	{
 		pthread_mutex_unlock(&philo_info->info_union->voice);
 		return ;
 	}
-	time_stamp = get_cur_time() - philo_info->info_union->time_to_start;
-	printf("%zu %zu %s\n", time_stamp, philo_id, message);
+	printf("%zu %zu %s\n", get_time_stamp(philo_info), philo_id, message);
 	pthread_mutex_unlock(&philo_info->info_union->voice);
 }
 
