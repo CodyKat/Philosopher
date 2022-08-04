@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/04 17:35:01 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:20:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	wait_for_philos(t_union *info_union)
 							f_watcher_is_all_full, info_union);
 	pthread_create(&watcher_is_someone_dead, NULL, \
 							f_watcher_is_someone_dead, info_union);
+	pthread_detach(watcher_is_all_full);
+	pthread_detach(watcher_is_someone_dead);
 	sem_wait(info_union->end_game);
 	kill_all_philos(info_union);
 	sem_close(info_union->end_game);
