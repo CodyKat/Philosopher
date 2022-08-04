@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:24:35 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/03 16:19:41 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/07/31 18:11:50 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,4 @@ void	ft_fork_error(t_union *info_union)
 int	ft_wexitstatus(int status)
 {
 	return ((status >> 8) & 0x000000ff);
-}
-
-int	is_dead(t_philo *info_philo)
-{
-	return (info_philo->info_union->time_to_die <= \
-				get_cur_time() - info_philo->time_of_last_meal);
 }

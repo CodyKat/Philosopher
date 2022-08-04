@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/03 15:26:21 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/01 23:59:34 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	check_is_someone_dead(t_philo *info_philo_arr)
 		if (time_to_starve >= time_to_die)
 		{
 			pthread_mutex_lock(&info_philo_arr->info_union->voice);
-			printf("%zu %d is die\n", get_time_stamp(info_philo_arr), n_philo);
+			printf("%zu %d is die\n", get_cur_time() - \
+				info_philo_arr->info_union->time_to_start, n_philo);
 			return (TRUE);
 		}
 	}
@@ -77,16 +78,9 @@ int	check_all_philo_is_full(t_philo *info_philo_arr)
 			return (FALSE);
 	}
 	pthread_mutex_lock(&info_philo_arr->info_union->voice);
-	printf("%zu all philo is full\n", get_time_stamp(info_philo_arr));
+	printf("%zu all philo is full\n", \
+		get_cur_time() - info_philo_arr->info_union->time_to_start);
 	return (TRUE);
-}
-
-void	*get_watcher_func_pointer(int argc)
-{
-	if (argc == 6)
-		return (watcher_optional);
-	else
-		return (watcher_no_optional);
 }
 
 int	main(int argc, char *argv[])
@@ -100,12 +94,15 @@ int	main(int argc, char *argv[])
 		return (ft_error());
 	if (malloc_and_init_resources(&info_union, &info_philo_arr) == ERROR)
 		ft_error();
+	if (argc == 6)
+		watcher = watcher_optional;
+	else
+		watcher = watcher_no_optional;
 	if (make_philos(&info_union, info_philo_arr) == ERROR)
 	{
 		error_in_making_philo(&info_union, &info_philo_arr);
 		return (0);
 	}
-	watcher = get_watcher_func_pointer(argc);
 	watcher(info_philo_arr);
 	destroy_all_mutex(&info_union);
 	free_all_resources(&info_union, &info_philo_arr);

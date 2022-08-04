@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_eat_func.c                                   :+:      :+:    :+:   */
+/*   philo_eat_func_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:22:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/30 20:59:59 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/04 17:36:16 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void	philo_eat_with_option(t_philo *info_philo)
 						(int)info_philo->info_union->num_each_philo_must_eat)
 	{
 		philo_is_speaking(info_philo, "is full");
-		exit(FULL);
+		sem_post(info_philo->info_union->full_count);
 	}
 }

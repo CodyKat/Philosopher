@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/03 16:19:30 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/04 17:33:54 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ typedef struct s_union
 	sem_t			*forks_set;
 	sem_t			*voice;
 	sem_t			*start_key;
+	sem_t			*full_count;
+	sem_t			*dead_flag;
+	sem_t			*end_game;
 	pid_t			*philo_pid_arr;
 }	t_union;
 
@@ -83,7 +86,6 @@ int		paras_is_in_valid_range(t_union *info_union);
 void	*ft_calloc(size_t size);
 void	ft_fork_error(t_union *info_union);
 int		ft_wexitstatus(int status);
-int		is_dead(t_philo *info_philo);
 
 //philo_bonus.c
 void	philo_process(t_philo *info_philo);
@@ -91,5 +93,9 @@ void	philo_process(t_philo *info_philo);
 //philo_eat_func.c
 void	philo_eat_with_no_option(t_philo *info_philo);
 void	philo_eat_with_option(t_philo *info_philo);
+
+//watcher_bonus.c
+void	*f_watcher_is_all_full(void	*info_union);
+void	*f_watcher_is_someone_dead(void *info_union);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 23:37:50 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/03 16:19:10 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/04 17:37:01 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,18 @@ void	philo_even_loop(t_philo *info_philo)
 void	*philo_check_dead_loop(void *info_parameter)
 {
 	t_philo	*info_philo;
-	t_union	*info_union;
-	size_t	philo_id;
 
 	info_philo = (t_philo *)info_parameter;
-	info_union = info_philo->info_union;
-	philo_id = info_philo->my_id;
 	while (1)
 	{
 		pthread_mutex_lock(&info_philo->mutex_time_of_last_meal);
-		if (is_dead(info_philo))
+		if (info_philo->info_union->time_to_die <= \
+				get_cur_time() - info_philo->time_of_last_meal)
 		{
 			sem_wait(info_philo->info_union->voice);
-			printf("%zu %zu died\n", get_time_stamp(info_union), philo_id);
-			exit(DEAD);
+			printf("%zu %zu died\n", \
+					get_time_stamp(info_philo->info_union), info_philo->my_id);
+			sem_post(info_philo->info_union->dead_flag);
 		}
 		pthread_mutex_unlock(&info_philo->mutex_time_of_last_meal);
 		usleep(1000);

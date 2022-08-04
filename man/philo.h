@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/03 15:17:16 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/01 23:57:23 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int		parsing(t_union *info_union, int argc, char **argv);
 int		ft_error(void);
 size_t	ft_atoul_check_range(char *str);
 size_t	get_cur_time(void);
-size_t	get_time_stamp(t_philo *info_philo);
 
 //util2.c
 int		paras_is_in_valid_range(t_union *info_union, int argc);

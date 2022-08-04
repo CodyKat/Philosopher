@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/31 18:15:05 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/04 17:35:01 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,27 @@ void	make_philos(t_union *info_union, t_philo *info_philo)
 
 void	init(t_union *info_union, t_philo *info_philo)
 {
-	memset(info_union, 0, sizeof(t_union));
+	t_union	*info_u;
+
+	info_u = info_union;
+	memset(info_u, 0, sizeof(t_union));
 	memset(info_philo, 0, sizeof(t_philo));
 	sem_unlink("voice");
 	sem_unlink("start_key");
 	sem_unlink("forks_set");
-	info_union->voice = sem_open("voice", O_CREAT, S_IRWXG, 1);
-	info_union->start_key = sem_open("start_key", O_CREAT, S_IRWXG, 1);
-	if (info_union->voice == SEM_FAILED || info_union->start_key == SEM_FAILED)
-		ft_error(info_union);
-	info_philo->info_union = info_union;
+	sem_unlink("full_count");
+	sem_unlink("dead_flag");
+	sem_unlink("end_game");
+	info_u->voice = sem_open("voice", O_CREAT, S_IRWXG, 1);
+	info_u->start_key = sem_open("start_key", O_CREAT, S_IRWXG, 1);
+	info_u->full_count = sem_open("full_count", O_CREAT, S_IRWXG, 0);
+	info_u->dead_flag = sem_open("dead_flag", O_CREAT, S_IRWXG, 0);
+	info_u->end_game = sem_open("end_game", O_CREAT, S_IRWXG, 0);
+	if (info_u->voice == SEM_FAILED || info_u->start_key == SEM_FAILED \
+	|| info_u->full_count == SEM_FAILED || info_u->dead_flag == SEM_FAILED \
+	|| info_u->end_game == SEM_FAILED)
+		ft_error(info_u);
+	info_philo->info_union = info_u;
 }
 
 void	kill_all_philos(t_union *info_union)
@@ -66,22 +77,17 @@ void	kill_all_philos(t_union *info_union)
 
 void	wait_for_philos(t_union *info_union)
 {
-	int	status;
-	int	full_philo_count;
+	pthread_t	watcher_is_all_full;
+	pthread_t	watcher_is_someone_dead;
 
-	full_philo_count = 0;
-	while (1)
-	{
-		waitpid(-1, &status, 0);
-		if (ft_wexitstatus(status) == DEAD)
-			break ;
-		else if (++full_philo_count == (int)info_union->num_of_philo)
-		{
-			printf("all philo is full\n");
-			break ;
-		}
-	}
+	pthread_create(&watcher_is_all_full, NULL, \
+							f_watcher_is_all_full, info_union);
+	pthread_create(&watcher_is_someone_dead, NULL, \
+							f_watcher_is_someone_dead, info_union);
+	sem_wait(info_union->end_game);
 	kill_all_philos(info_union);
+	sem_close(info_union->end_game);
+	sem_close(info_union->dead_flag);
 	sem_close(info_union->forks_set);
 	sem_close(info_union->voice);
 	sem_close(info_union->start_key);
