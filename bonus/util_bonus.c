@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:06:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/28 19:09:10 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/04 22:31:45 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ size_t	ft_atoul_check_range(char *str)
 
 void	ft_error(t_union *info_union)
 {
-	sem_close(info_union->voice);
-	sem_close(info_union->forks_set);
-	sem_close(info_union->start_key);
+	close_all_sem(info_union);
 	write(2, "ERROR\n", 6);
 	exit(1);
 }

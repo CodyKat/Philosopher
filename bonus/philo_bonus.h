@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/04 17:33:54 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/04 23:10:27 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@
 # define INT_MAX 2147483647
 # define LOCK 1
 # define UNLOCK 0
-# define NONE 0
-# define DEAD 1
-# define FULL 2
 
 typedef struct s_union
 {
 	int				stop_eating;
 	int				has_optional_arg;
+	int				is_someone_dead;
 	size_t			num_of_philo;
 	size_t			time_to_die;
 	size_t			time_to_eat;
@@ -49,6 +47,7 @@ typedef struct s_union
 	sem_t			*full_count;
 	sem_t			*dead_flag;
 	sem_t			*end_game;
+	sem_t			**sem_each_philo_time_last_meal;
 	pid_t			*philo_pid_arr;
 }	t_union;
 
@@ -57,7 +56,6 @@ typedef struct s_philo
 	size_t			my_id;
 	size_t			time_of_last_meal;
 	int				eat_count;
-	pthread_mutex_t	mutex_time_of_last_meal;
 	t_union			*info_union;
 }	t_philo;
 
@@ -86,6 +84,7 @@ int		paras_is_in_valid_range(t_union *info_union);
 void	*ft_calloc(size_t size);
 void	ft_fork_error(t_union *info_union);
 int		ft_wexitstatus(int status);
+void	close_all_sem(t_union *info_union);
 
 //philo_bonus.c
 void	philo_process(t_philo *info_philo);
@@ -97,5 +96,11 @@ void	philo_eat_with_option(t_philo *info_philo);
 //watcher_bonus.c
 void	*f_watcher_is_all_full(void	*info_union);
 void	*f_watcher_is_someone_dead(void *info_union);
+
+//libft
+char	*ft_itoa(int c);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(const char *s);
 
 #endif

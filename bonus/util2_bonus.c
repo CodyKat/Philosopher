@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:24:35 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/31 18:11:50 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/04 23:13:10 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,23 @@ void	ft_fork_error(t_union *info_union)
 int	ft_wexitstatus(int status)
 {
 	return ((status >> 8) & 0x000000ff);
+}
+
+void	close_all_sem(t_union *info_union)
+{
+	int	index;
+
+	index = -1;
+	if (info_union->sem_each_philo_time_last_meal != NULL)
+	{
+		while (++index < (int)info_union->num_of_philo)
+			sem_close(info_union->sem_each_philo_time_last_meal[index]);
+		free(info_union->sem_each_philo_time_last_meal);
+	}
+	sem_close(info_union->forks_set);
+	sem_close(info_union->voice);
+	sem_close(info_union->start_key);
+	sem_close(info_union->full_count);
+	sem_close(info_union->dead_flag);
+	sem_close(info_union->end_game);
 }

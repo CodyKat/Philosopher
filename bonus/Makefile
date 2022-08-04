@@ -8,7 +8,11 @@ SRCS =	main_bonus.c			\
 		util_bonus.c			\
 		util2_bonus.c			\
 		philo_eat_func_bonus.c	\
-		watcher_bonus.c
+		watcher_bonus.c			\
+		ft_itoa_bonus.c			\
+		ft_memcpy_bonus.c		\
+		ft_strjoin_bonus.c		\
+		ft_strlen_bonus.c
 
 OBJS = ${SRCS:.c=.o}
 

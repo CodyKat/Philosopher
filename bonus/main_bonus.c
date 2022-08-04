@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/04 18:20:22 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/04 23:13:42 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,7 @@ void	wait_for_philos(t_union *info_union)
 	pthread_detach(watcher_is_someone_dead);
 	sem_wait(info_union->end_game);
 	kill_all_philos(info_union);
-	sem_close(info_union->end_game);
-	sem_close(info_union->dead_flag);
-	sem_close(info_union->forks_set);
-	sem_close(info_union->voice);
-	sem_close(info_union->start_key);
+	close_all_sem(info_union);
 }
 
 int	main(int argc, char *argv[])
