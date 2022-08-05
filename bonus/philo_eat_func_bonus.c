@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:22:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/04 22:47:51 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/05 15:58:27 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,5 @@ void	philo_eat_with_option(t_philo *info_philo)
 	info_philo->eat_count++;
 	if (info_philo->eat_count == \
 						(int)info_philo->info_union->num_each_philo_must_eat)
-	{
-		philo_is_speaking(info_philo, "is full");
 		sem_post(info_philo->info_union->full_count);
-	}
 }

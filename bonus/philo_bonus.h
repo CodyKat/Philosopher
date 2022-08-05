@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/04 23:10:27 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/05 15:58:05 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <sys/time.h>
-# include <sys/stat.h>
-# include <sys/wait.h>
 # include <string.h>
 
 # define TRUE 1
@@ -83,7 +81,6 @@ size_t	get_time_stamp(t_union *info_union);
 int		paras_is_in_valid_range(t_union *info_union);
 void	*ft_calloc(size_t size);
 void	ft_fork_error(t_union *info_union);
-int		ft_wexitstatus(int status);
 void	close_all_sem(t_union *info_union);
 
 //philo_bonus.c

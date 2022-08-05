@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:24:35 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/04 23:13:10 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/05 15:58:05 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ void	ft_fork_error(t_union *info_union)
 {
 	kill_all_philos(info_union);
 	ft_error(info_union);
-}
-
-int	ft_wexitstatus(int status)
-{
-	return ((status >> 8) & 0x000000ff);
 }
 
 void	close_all_sem(t_union *info_union)
