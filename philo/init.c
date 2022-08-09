@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:18:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/01 16:26:27 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 01:25:44 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,11 @@ int	malloc_all_resources(t_union *info_union, t_philo **info_philo_arr, \
 	return (TRUE);
 }
 
-void	free_all_resources(t_union *info_union, t_philo **info_philo_arr)
+void	free_all_square_resources(t_union *info_union, int num_of_philo)
 {
 	int	index;
-	int	num_of_philo;
 
-	num_of_philo = info_union->num_of_philo;
 	index = -1;
-	if (info_union->fork_status != NULL)
-		free(info_union->fork_status);
-	if (*info_philo_arr != NULL)
-		free(*info_philo_arr);
 	if (info_union->philo_arr != NULL)
 	{
 		while (info_union->philo_arr[++index] && (index < num_of_philo))
@@ -63,6 +57,26 @@ void	free_all_resources(t_union *info_union, t_philo **info_philo_arr)
 			free(info_union->fork_arr[index]);
 		free(info_union->fork_arr);
 	}
+	index = -1;
+	if (info_union->fork_arr != NULL)
+	{
+		while (info_union->fork_arr[++index] && (index < num_of_philo))
+			free(info_union->fork_arr[index]);
+		free(info_union->fork_arr);
+	}
+}
+
+void	free_all_resources(t_union *info_union, t_philo **info_philo_arr)
+{
+	int	index;
+	int	num_of_philo;
+
+	num_of_philo = info_union->num_of_philo;
+	if (info_union->fork_status != NULL)
+		free(info_union->fork_status);
+	if (*info_philo_arr != NULL)
+		free(*info_philo_arr);
+	free_all_square_resources(info_union, num_of_philo);
 }
 
 void	init_all_resources(t_union *info_union, t_philo *info_philo_arr)
@@ -80,6 +94,9 @@ void	init_all_resources(t_union *info_union, t_philo *info_philo_arr)
 		info_philo_arr[philo_count].left_fork_id = philo_count;
 		info_philo_arr[philo_count].info_union = info_union;
 		pthread_mutex_init(info_union->fork_arr[philo_count], NULL);
+		pthread_mutex_init(&info_philo_arr[philo_count].m_eat_count, NULL);
+		pthread_mutex_init(&info_philo_arr[philo_count].m_time_of_last_meal,\
+																		NULL);
 	}
 }
 

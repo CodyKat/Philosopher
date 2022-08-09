@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/05 15:58:05 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 00:49:08 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define INT_MAX 2147483647
 # define LOCK 1
 # define UNLOCK 0
+# define GET 42
+# define SET 24
 
 typedef struct s_union
 {
@@ -45,6 +47,8 @@ typedef struct s_union
 	sem_t			*full_count;
 	sem_t			*dead_flag;
 	sem_t			*end_game;
+	sem_t			*get_cur_time;
+	sem_t			*is_dead_status;
 	sem_t			**sem_each_philo_time_last_meal;
 	pid_t			*philo_pid_arr;
 }	t_union;
@@ -82,6 +86,7 @@ int		paras_is_in_valid_range(t_union *info_union);
 void	*ft_calloc(size_t size);
 void	ft_fork_error(t_union *info_union);
 void	close_all_sem(t_union *info_union);
+int		getset_is_someone_dead(int mode, t_union *info_union, int set_value);
 
 //philo_bonus.c
 void	philo_process(t_philo *info_philo);

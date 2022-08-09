@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/05 15:59:56 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 01:11:16 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_philo
 	int				right_fork_id;
 	int				left_fork_id;
 	int				eat_count;
+	pthread_mutex_t	m_time_of_last_meal;
+	pthread_mutex_t	m_eat_count;
 	t_union			*info_union;
 }	t_philo;
 

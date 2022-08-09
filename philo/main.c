@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/01 23:59:34 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 01:13:58 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ int	check_is_someone_dead(t_philo *info_philo_arr)
 	n_philo = -1;
 	while (++n_philo < num_of_philo)
 	{
+		pthread_mutex_lock(&info_philo_arr[n_philo].m_time_of_last_meal);
 		time_to_starve = get_cur_time() - \
 									info_philo_arr[n_philo].time_of_last_meal;
+		pthread_mutex_unlock(&info_philo_arr[n_philo].m_time_of_last_meal);
 		if (time_to_starve >= time_to_die)
 		{
 			pthread_mutex_lock(&info_philo_arr->info_union->voice);
@@ -74,8 +76,13 @@ int	check_all_philo_is_full(t_philo *info_philo_arr)
 	n_philo = -1;
 	while (++n_philo < num_of_philo)
 	{
+		pthread_mutex_lock(&info_philo_arr[n_philo].m_eat_count);
 		if (info_philo_arr[n_philo].eat_count < num_philo_must_eat)
+		{
+			pthread_mutex_unlock(&info_philo_arr[n_philo].m_eat_count);
 			return (FALSE);
+		}
+		pthread_mutex_unlock(&info_philo_arr[n_philo].m_eat_count);
 	}
 	pthread_mutex_lock(&info_philo_arr->info_union->voice);
 	printf("%zu all philo is full\n", \

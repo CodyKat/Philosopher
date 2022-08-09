@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:24:35 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/05 15:58:05 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 00:50:41 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,22 @@ void	ft_fork_error(t_union *info_union)
 	ft_error(info_union);
 }
 
+int	getset_is_someone_dead(int mode, t_union *info_union, int set_value)
+{
+	sem_wait(info_union->is_dead_status);
+	if (mode == GET)
+	{
+		set_value++;
+		return (info_union->is_someone_dead);
+	}
+	else
+	{
+		info_union->is_someone_dead = set_value;
+		sem_post(info_union->is_dead_status);
+		return (0);
+	}
+}
+
 void	close_all_sem(t_union *info_union)
 {
 	int	index;
@@ -61,4 +77,6 @@ void	close_all_sem(t_union *info_union)
 	sem_close(info_union->full_count);
 	sem_close(info_union->dead_flag);
 	sem_close(info_union->end_game);
+	sem_close(info_union->is_dead_status);
+	sem_close(info_union->get_cur_time);
 }

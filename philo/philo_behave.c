@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:48:22 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/07/28 17:19:04 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 01:20:02 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,15 @@ void	philo_eat(t_philo *my_info)
 	size_t	time_to_finish_eat;
 
 	time_to_finish_eat = get_cur_time() + my_info->info_union->time_to_eat;
+	pthread_mutex_lock(&my_info->m_time_of_last_meal);
 	my_info->time_of_last_meal = get_cur_time();
+	pthread_mutex_unlock(&my_info->m_time_of_last_meal);
 	philo_is_speaking(my_info, my_info->my_id, "is eating");
 	while (get_cur_time() < time_to_finish_eat)
 		usleep(300);
+	pthread_mutex_lock(&my_info->m_eat_count);
 	my_info->eat_count++;
+	pthread_mutex_unlock(&my_info->m_eat_count);
 	my_info->info_union->fork_status[my_info->left_fork_id] = UNLOCK;
 	my_info->info_union->fork_status[my_info->right_fork_id] = UNLOCK;
 	pthread_mutex_unlock(my_info->info_union->fork_arr[my_info->left_fork_id]);
