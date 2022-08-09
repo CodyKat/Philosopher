@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:18:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 01:29:39 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 02:11:39 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void	free_all_resources(t_union *info_union, t_philo **info_philo_arr)
 	index = -1;
 	if (info_union->philo_arr != NULL)
 	{
-		while (info_union->philo_arr[++index] && (index < num_of_philo))
+		while ((++index < num_of_philo) && info_union->philo_arr[index])
 			free(info_union->philo_arr[index]);
 		free(info_union->philo_arr);
 	}
 	index = -1;
 	if (info_union->fork_arr != NULL)
 	{
-		while (info_union->fork_arr[++index] && (index < num_of_philo))
+		while ((++index < num_of_philo) && info_union->fork_arr[index])
 			free(info_union->fork_arr[index]);
 		free(info_union->fork_arr);
 	}

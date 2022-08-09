@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:24:35 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 00:50:41 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 03:06:06 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,39 +38,26 @@ void	*ft_calloc(size_t size)
 	return (p_mem);
 }
 
-void	ft_fork_error(t_union *info_union)
+void	ft_fork_error(t_union *info_union, t_philo *info_philo)
 {
 	kill_all_philos(info_union);
-	ft_error(info_union);
+	ft_error(info_union, info_philo);
 }
 
-int	getset_is_someone_dead(int mode, t_union *info_union, int set_value)
+void	close_philo_sem(t_philo *info_philo)
 {
-	sem_wait(info_union->is_dead_status);
-	if (mode == GET)
+	int	n_philo;
+
+	n_philo = -1;
+	while (++n_philo < (int)info_philo->info_union->num_of_philo)
 	{
-		set_value++;
-		return (info_union->is_someone_dead);
-	}
-	else
-	{
-		info_union->is_someone_dead = set_value;
-		sem_post(info_union->is_dead_status);
-		return (0);
+		sem_close(info_philo->sem_each_philo_time_last_meal[n_philo]);
+		sem_close(info_philo->sem_eat_count[n_philo]);
 	}
 }
 
-void	close_all_sem(t_union *info_union)
+void	close_union_sem(t_union *info_union)
 {
-	int	index;
-
-	index = -1;
-	if (info_union->sem_each_philo_time_last_meal != NULL)
-	{
-		while (++index < (int)info_union->num_of_philo)
-			sem_close(info_union->sem_each_philo_time_last_meal[index]);
-		free(info_union->sem_each_philo_time_last_meal);
-	}
 	sem_close(info_union->forks_set);
 	sem_close(info_union->voice);
 	sem_close(info_union->start_key);
@@ -78,5 +65,4 @@ void	close_all_sem(t_union *info_union)
 	sem_close(info_union->dead_flag);
 	sem_close(info_union->end_game);
 	sem_close(info_union->is_dead_status);
-	sem_close(info_union->get_cur_time);
 }

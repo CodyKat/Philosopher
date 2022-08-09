@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:06:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 00:52:27 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 03:04:12 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ size_t	ft_atoul_check_range(char *str)
 		return (return_num);
 }
 
-void	ft_error(t_union *info_union)
+void	ft_error(t_union *info_union, t_philo *info_philo)
 {
-	close_all_sem(info_union);
+	if (info_philo != NULL)
+		close_philo_sem(info_philo);
+	if (info_union != NULL)
+		close_union_sem(info_union);
 	write(2, "ERROR\n", 6);
 	exit(1);
 }

@@ -6,45 +6,47 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:21:53 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 00:52:27 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 02:58:55 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	*f_watcher_is_all_full(void	*info_union)
+void	*f_watcher_is_all_full(void	*union_para)
 {
-	t_union	*info;
+	t_union	*info_union;
 	int		n_philo;
 
-	info = (t_union *)info_union;
+	info_union = (t_union *)union_para;
 	n_philo = -1;
-	while (++n_philo < (int)info->num_of_philo)
-		sem_wait(info->full_count);
-	if (getset_is_someone_dead(GET, info, 0))
+	while (++n_philo < (int)info_union->num_of_philo)
+		sem_wait(info_union->full_count);
+	sem_wait(info_union->is_dead_status);
+	if (info_union->is_someone_dead == FALSE)
 	{
-		sem_post(info->is_dead_status);
-		sem_wait(info->voice);
+		sem_wait(info_union->voice);
 		printf("all philo is full\n");
+		sem_post(info_union->is_dead_status);
 	}
-	else
-		sem_post(info->is_dead_status);
-	sem_post(info->dead_flag);
-	sem_post(info->end_game);
+	sem_post(info_union->is_dead_status);
+	sem_post(info_union->dead_flag);
+	sem_post(info_union->end_game);
 	return (NULL);
 }
 
-void	*f_watcher_is_someone_dead(void *info_union)
+void	*f_watcher_is_someone_dead(void *union_para)
 {
-	t_union	*info;
+	t_union	*info_union;
 	int		n_philo;
 
+	info_union = (t_union *)union_para;
+	sem_wait(info_union->dead_flag);
+	sem_wait(info_union->is_dead_status);
+	info_union->is_someone_dead = TRUE;
+	sem_post(info_union->is_dead_status);
 	n_philo = -1;
-	info = (t_union *)info_union;
-	sem_wait(info->dead_flag);
-	getset_is_someone_dead(SET, info, TRUE);
-	while (++n_philo < (int)info->num_of_philo)
-		sem_post(info->full_count);
-	sem_post(info->end_game);
+	while (++n_philo < (int)info_union->num_of_philo)
+		sem_post(info_union->full_count);
+	sem_post(info_union->end_game);
 	return (NULL);
 }
