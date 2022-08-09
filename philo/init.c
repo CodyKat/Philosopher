@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:18:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 01:25:44 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 01:27:03 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	init_all_resources(t_union *info_union, t_philo *info_philo_arr)
 		info_philo_arr[philo_count].info_union = info_union;
 		pthread_mutex_init(info_union->fork_arr[philo_count], NULL);
 		pthread_mutex_init(&info_philo_arr[philo_count].m_eat_count, NULL);
-		pthread_mutex_init(&info_philo_arr[philo_count].m_time_of_last_meal,\
+		pthread_mutex_init(&info_philo_arr[philo_count].m_time_of_last_meal, \
 																		NULL);
 	}
 }
