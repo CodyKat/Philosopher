@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 03:03:35 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 05:46:17 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_union
 	sem_t			*full_count;
 	sem_t			*dead_flag;
 	sem_t			*end_game;
-	sem_t			*is_dead_status;
+	sem_t			*sem_is_someone_dead;
 	pid_t			*philo_pid_arr;
 }	t_union;
 
@@ -70,7 +70,8 @@ void	init_after_parsing(t_union *info_union, t_philo *info_philo, int argc);
 void	make_my_philo_sem(t_philo *info_union);
 
 //philo_behave_bonus.c
-void	philo_is_speaking(t_philo *info_philo, char *message);
+void	philo_is_speaking(t_philo *info_philo, size_t time_stamp, \
+																char *message);
 void	pick_up_forks(t_philo *info_philo);
 void	philo_eat(t_philo *info_philo);
 void	philo_sleep(t_philo *info_philo);

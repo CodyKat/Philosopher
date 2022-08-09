@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 23:37:50 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 03:01:46 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 05:40:38 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	philo_odd_loop(t_philo *info_philo)
 		philo_eat = philo_eat_with_option;
 	else
 		philo_eat = philo_eat_with_no_option;
-	usleep(1000);
+	usleep(100);
 	while (1)
 	{
 		pick_up_forks(info_philo);
 		philo_eat(info_philo);
 		philo_sleep(info_philo);
 		philo_think(info_philo);
-		usleep(300);
+		usleep(100);
 	}
 }
 
@@ -69,6 +69,7 @@ void	*philo_check_dead_loop(void *philo_para)
 					get_time_stamp(info_philo->info_union), info_philo->my_id);
 			sem_post(info_philo->info_union->dead_flag);
 			sem_post(sem_time_last_meal);
+			return (NULL);
 		}
 		sem_post(sem_time_last_meal);
 		usleep(1000);

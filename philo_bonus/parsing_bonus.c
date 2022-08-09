@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:03:13 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 03:15:48 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 06:08:16 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	init_after_parsing(t_union *info_union, t_philo *info_philo, int argc)
 	info_philo->sem_eat_count = \
 		(sem_t **)malloc(sizeof(sem_t *) * info_union->num_of_philo);
 	info_union->forks_set = sem_open("forks_set", O_CREAT, S_IRWXG, \
-												info_union->num_of_philo / 2);
+												info_union->num_of_philo);
 	if (info_union->forks_set == SEM_FAILED \
 		|| info_philo->sem_eat_count == NULL \
 		||info_philo->sem_each_philo_time_last_meal == NULL)

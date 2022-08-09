@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:24:35 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 03:06:06 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 05:00:54 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	close_union_sem(t_union *info_union)
 	sem_close(info_union->full_count);
 	sem_close(info_union->dead_flag);
 	sem_close(info_union->end_game);
-	sem_close(info_union->is_dead_status);
+	sem_close(info_union->sem_is_someone_dead);
 }
