@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 01:30:17 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 04:26:06 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_is_someone_dead(t_philo *info_philo_arr)
 		{
 			pthread_mutex_lock(&info_philo_arr->info_union->voice);
 			printf("%zu %d is die\n", get_cur_time() - \
-				info_philo_arr->info_union->time_to_start, n_philo);
+				info_philo_arr->info_union->time_to_start, n_philo + 1);
 			return (TRUE);
 		}
 	}

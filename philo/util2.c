@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:24:35 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/01 23:56:56 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 04:19:14 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,16 @@ void	error_in_making_philo(t_union *info_union, t_philo **info_philo_arr)
 	destroy_all_mutex(info_union);
 	free_all_resources(info_union, info_philo_arr);
 	ft_error();
+}
+
+void	free_deadlock_if_solo_philo(t_philo *info_philo)
+{
+	pthread_mutex_t	*to_unlock_mutex;
+	int				his_right_side_fork_id;
+
+	if (info_philo->info_union->num_of_philo != 1)
+		return ;
+	his_right_side_fork_id = info_philo->right_fork_id;
+	to_unlock_mutex = info_philo->info_union->fork_arr[his_right_side_fork_id];
+	pthread_mutex_unlock(to_unlock_mutex);
 }

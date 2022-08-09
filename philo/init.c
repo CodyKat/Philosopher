@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:18:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 02:11:39 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 04:23:49 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	init_all_resources(t_union *info_union, t_philo *info_philo_arr)
 
 	pthread_mutex_init(&info_union->voice, NULL);
 	pthread_mutex_init(&info_union->start_key, NULL);
+	pthread_mutex_init(&info_union->m_stop_eating, NULL);
 	philo_count = -1;
 	while (++philo_count < info_union->num_of_philo)
 	{
