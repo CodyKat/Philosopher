@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 06:02:38 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 06:41:08 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	init(t_union *info_union, t_philo *info_philo)
 	t_union	*info_u;
 
 	info_u = info_union;
-	memset(info_u, 0, sizeof(t_union));
-	memset(info_philo, 0, sizeof(t_philo));
 	sem_unlink("voice");
 	sem_unlink("start_key");
 	sem_unlink("forks_set");
@@ -59,10 +57,12 @@ void	init(t_union *info_union, t_philo *info_philo)
 	info_u->full_count = sem_open("full_count", O_CREAT, S_IRWXG, 0);
 	info_u->dead_flag = sem_open("dead_flag", O_CREAT, S_IRWXG, 0);
 	info_u->end_game = sem_open("end_game", O_CREAT, S_IRWXU, 0);
-	info_u->sem_is_someone_dead = sem_open("sem_is_someone_dead", O_CREAT, S_IRWXU, 1);
+	info_u->sem_is_someone_dead = \
+						sem_open("sem_is_someone_dead", O_CREAT, S_IRWXU, 1);
 	if (info_u->voice == SEM_FAILED || info_u->start_key == SEM_FAILED \
 	|| info_u->full_count == SEM_FAILED || info_u->dead_flag == SEM_FAILED \
-	|| info_u->end_game == SEM_FAILED || info_u->sem_is_someone_dead == SEM_FAILED)
+	|| info_u->end_game == SEM_FAILED \
+	|| info_u->sem_is_someone_dead == SEM_FAILED)
 		ft_error(info_u, NULL);
 	info_philo->info_union = info_u;
 }
@@ -99,6 +99,8 @@ int	main(int argc, char *argv[])
 	t_union	info_union;
 	t_philo	info_philo;
 
+	memset(&info_union, 0, sizeof(t_union));
+	memset(&info_philo, 0, sizeof(t_philo));
 	init(&info_union, &info_philo);
 	parsing(&info_union, argc, argv);
 	init_after_parsing(&info_union, &info_philo, argc);

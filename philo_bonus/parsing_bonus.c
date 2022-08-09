@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:03:13 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 06:08:16 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 06:39:13 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	parsing(t_union *info_union, int argc, char **argv)
 	ft_error(info_union, NULL);
 }
 
-void	make_each_philo_sem(t_union *info_union, t_philo *info_philo)
+void	make_sem_eat_count(t_union *info_union, t_philo *info_philo)
 {
 	int		n_philo;
 	char	*str_philo_id;
@@ -46,21 +46,50 @@ void	make_each_philo_sem(t_union *info_union, t_philo *info_philo)
 	while (++n_philo < (int)info_union->num_of_philo)
 	{
 		str_philo_id = ft_itoa(n_philo + 1);
-		str_sem_name = ft_strjoin("sem_philo_time_last_meal", str_philo_id);
-		sem_unlink(str_sem_name);
-		info_philo->sem_each_philo_time_last_meal[n_philo] = \
-			sem_open(str_sem_name, O_CREAT, S_IRWXG, 1);
-		free(str_sem_name);
-		str_sem_name = ft_strjoin("sem_eat_count", str_philo_id);
+		if (str_philo_id == NULL)
+			ft_error(info_union, info_philo);
+		str_sem_name = ft_strjoin("sem_eat_count ", str_philo_id);
+		if (str_sem_name == NULL)
+			ft_error(info_union, info_philo);
 		sem_unlink(str_sem_name);
 		info_philo->sem_eat_count[n_philo] = \
-				sem_open(str_sem_name, O_CREAT, S_IRWXG, 1);
+								sem_open(str_sem_name, O_CREAT, S_IRWXG, 1);
 		free(str_sem_name);
 		free(str_philo_id);
-		if (info_philo->sem_each_philo_time_last_meal[n_philo] == SEM_FAILED \
-			|| info_philo->sem_eat_count[n_philo] == SEM_FAILED)
+		if (info_philo->sem_eat_count[n_philo] == SEM_FAILED)
 			ft_error(info_union, info_philo);
 	}
+}
+
+void	make_sem_time_last_meal(t_union *info_union, t_philo *info_philo)
+{
+	int		n_philo;
+	char	*str_philo_id;
+	char	*str_sem_name;
+
+	n_philo = -1;
+	while (++n_philo < (int)info_union->num_of_philo)
+	{
+		str_philo_id = ft_itoa(n_philo + 1);
+		if (str_philo_id == NULL)
+			ft_error(info_union, info_philo);
+		str_sem_name = ft_strjoin("sem_philo_time_last_meal ", str_philo_id);
+		if (str_sem_name == NULL)
+			ft_error(info_union, info_philo);
+		sem_unlink(str_sem_name);
+		info_philo->sem_each_philo_time_last_meal[n_philo] = \
+								sem_open(str_sem_name, O_CREAT, S_IRWXG, 1);
+		free(str_philo_id);
+		free(str_sem_name);
+		if (info_philo->sem_each_philo_time_last_meal[n_philo] == SEM_FAILED)
+			ft_error(info_union, info_philo);
+	}
+}
+
+void	make_each_philo_sem(t_union *info_union, t_philo *info_philo)
+{
+	make_sem_time_last_meal(info_union, info_philo);
+	make_sem_eat_count(info_union, info_philo);
 }
 
 void	init_after_parsing(t_union *info_union, t_philo *info_philo, int argc)
