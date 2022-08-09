@@ -1,6 +1,6 @@
 CC = cc
 NAME = philo
-CFLAGS = -fsanitize=thread -g3#-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SRCS =	main.c	\
 		parsing.c	\
 		util.c		\

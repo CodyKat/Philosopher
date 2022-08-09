@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/16 17:18:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 01:27:03 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 01:29:39 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,16 @@ int	malloc_all_resources(t_union *info_union, t_philo **info_philo_arr, \
 	return (TRUE);
 }
 
-void	free_all_square_resources(t_union *info_union, int num_of_philo)
+void	free_all_resources(t_union *info_union, t_philo **info_philo_arr)
 {
+	int	num_of_philo;
 	int	index;
 
+	num_of_philo = info_union->num_of_philo;
+	if (info_union->fork_status != NULL)
+		free(info_union->fork_status);
+	if (*info_philo_arr != NULL)
+		free(*info_philo_arr);
 	index = -1;
 	if (info_union->philo_arr != NULL)
 	{
@@ -57,26 +63,6 @@ void	free_all_square_resources(t_union *info_union, int num_of_philo)
 			free(info_union->fork_arr[index]);
 		free(info_union->fork_arr);
 	}
-	index = -1;
-	if (info_union->fork_arr != NULL)
-	{
-		while (info_union->fork_arr[++index] && (index < num_of_philo))
-			free(info_union->fork_arr[index]);
-		free(info_union->fork_arr);
-	}
-}
-
-void	free_all_resources(t_union *info_union, t_philo **info_philo_arr)
-{
-	int	index;
-	int	num_of_philo;
-
-	num_of_philo = info_union->num_of_philo;
-	if (info_union->fork_status != NULL)
-		free(info_union->fork_status);
-	if (*info_philo_arr != NULL)
-		free(*info_philo_arr);
-	free_all_square_resources(info_union, num_of_philo);
 }
 
 void	init_all_resources(t_union *info_union, t_philo *info_philo_arr)
