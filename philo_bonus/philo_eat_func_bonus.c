@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:22:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 12:36:00 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 13:52:12 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	philo_eat_with_no_option(t_philo *info_philo)
 	sem_time_last_meal = \
 		info_philo->sem_each_philo_time_last_meal[sem_index];
 	sem_wait(sem_time_last_meal);
-	//info_philo->time_of_last_meal = get_cur_time();
+	info_philo->time_of_last_meal = get_cur_time();
 	sem_post(sem_time_last_meal);
 	sem_wait(sem_time_last_meal);
 	time_to_finish_eat = \
