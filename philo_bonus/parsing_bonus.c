@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:03:13 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 06:39:13 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 11:33:45 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	make_sem_time_last_meal(t_union *info_union, t_philo *info_philo)
 		sem_unlink(str_sem_name);
 		info_philo->sem_each_philo_time_last_meal[n_philo] = \
 								sem_open(str_sem_name, O_CREAT, S_IRWXG, 1);
+		printf("info-> %p \n", info_philo->sem_each_philo_time_last_meal[n_philo]);
 		free(str_philo_id);
 		free(str_sem_name);
 		if (info_philo->sem_each_philo_time_last_meal[n_philo] == SEM_FAILED)
