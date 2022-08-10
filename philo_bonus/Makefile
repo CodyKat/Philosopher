@@ -1,6 +1,6 @@
 CC = cc
 NAME = philo_bonus
-CFLAGS = -fsanitize=thread -g3 #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SRCS =	main_bonus.c			\
 		parsing_bonus.c			\
 		philo_behave_bonus.c	\

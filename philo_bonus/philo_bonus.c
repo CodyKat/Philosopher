@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 23:37:50 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 06:48:29 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/10 14:31:48 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	*philo_check_dead_loop(void *philo_para)
 		if (info_philo->info_union->time_to_die <= time_to_starve)
 		{
 			sem_wait(info_philo->info_union->voice);
-			printf("%zu %zu died\n", \
-					get_time_stamp(info_philo->info_union), info_philo->my_id);
+			printf("%zu %zu died\n",
+				get_time_stamp(info_philo->info_union), info_philo->my_id);
 			sem_post(info_philo->info_union->dead_flag);
 			return (NULL);
 		}
