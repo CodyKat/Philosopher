@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:03:13 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 13:51:33 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/11 12:36:33 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	make_sem_eat_count(t_union *info_union, t_philo *info_philo)
 		str_philo_id = ft_itoa(n_philo + 1);
 		if (str_philo_id == NULL)
 			ft_error(info_union, info_philo);
-		str_sem_name = ft_strjoin("sem_eat_count ", str_philo_id);
+		str_sem_name = ft_strjoin("sem_eat_count", str_philo_id);
 		if (str_sem_name == NULL)
 			ft_error(info_union, info_philo);
 		sem_unlink(str_sem_name);
@@ -73,7 +73,7 @@ void	make_sem_time_last_meal(t_union *info_union, t_philo *info_philo)
 		str_philo_id = ft_itoa(n_philo + 1);
 		if (str_philo_id == NULL)
 			ft_error(info_union, info_philo);
-		str_sem_name = ft_strjoin("sem_philo_time_last_meal ", str_philo_id);
+		str_sem_name = ft_strjoin("sem_philo_time_last_meal", str_philo_id);
 		if (str_sem_name == NULL)
 			ft_error(info_union, info_philo);
 		sem_unlink(str_sem_name);
