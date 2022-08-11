@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 14:30:07 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/11 19:38:18 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_union
 	sem_t			*dead_flag;
 	sem_t			*end_game;
 	sem_t			*sem_is_someone_dead;
+	sem_t			*sem_get_forks;
 	pid_t			*philo_pid_arr;
 }	t_union;
 

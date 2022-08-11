@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   philo_eat_func_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:22:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/11 13:29:58 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/11 19:22:21 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-
-extern int static_sem_philo_last_meal_time[10];
 
 void	philo_eat_with_no_option(t_philo *info_philo)
 {
@@ -24,19 +22,11 @@ void	philo_eat_with_no_option(t_philo *info_philo)
 	sem_time_last_meal = \
 		info_philo->sem_each_philo_time_last_meal[sem_index];
 	sem_wait(sem_time_last_meal);
-	static_sem_philo_last_meal_time[info_philo->my_id - 1]--;
-	printf("sem_philo_last_meal_time[%zu] : %d\n", info_philo->my_id, static_sem_philo_last_meal_time[info_philo->my_id - 1]);
 	info_philo->time_of_last_meal = get_cur_time();
-	static_sem_philo_last_meal_time[info_philo->my_id - 1]++;
-	printf("sem_philo_last_meal_time[%zu] : %d\n", info_philo->my_id, static_sem_philo_last_meal_time[info_philo->my_id - 1]);
 	sem_post(sem_time_last_meal);
 	sem_wait(sem_time_last_meal);
-	static_sem_philo_last_meal_time[info_philo->my_id - 1]--;
-	printf("sem_philo_last_meal_time[%zu] : %d\n", info_philo->my_id, static_sem_philo_last_meal_time[info_philo->my_id - 1]);
 	time_to_finish_eat = \
 			info_philo->time_of_last_meal + info_philo->info_union->time_to_eat;
-	static_sem_philo_last_meal_time[info_philo->my_id - 1]++;
-	printf("sem_philo_last_meal_time[%zu] : %d\n", info_philo->my_id, static_sem_philo_last_meal_time[info_philo->my_id - 1]);
 	sem_post(sem_time_last_meal);
 	philo_is_speaking(info_philo, get_time_stamp(info_philo->info_union), \
 																"is eating");

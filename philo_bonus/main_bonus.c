@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/11 13:26:53 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/11 19:38:18 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-
-int	static_sem_philo_last_meal_time[10] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-int	static_sem_is_someone_dead = 1;
 
 void	make_philos(t_union *info_union, t_philo *info_philo)
 {
@@ -55,6 +52,7 @@ void	init(t_union *info_union, t_philo *info_philo)
 	sem_unlink("dead_flag");
 	sem_unlink("end_game");
 	sem_unlink("sem_is_someone_dead");
+	sem_unlink("sem_get_forks");
 	info_u->voice = sem_open("voice", O_CREAT, S_IRWXG, 1);
 	info_u->start_key = sem_open("start_key", O_CREAT, S_IRWXG, 1);
 	info_u->full_count = sem_open("full_count", O_CREAT, S_IRWXG, 0);

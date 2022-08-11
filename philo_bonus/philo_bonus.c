@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 23:37:50 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/11 13:29:42 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/11 19:23:31 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	philo_even_loop(t_philo *info_philo)
 	}
 }
 
-extern int static_sem_philo_last_meal_time[10];
-
 void	*philo_check_dead_loop(void *philo_para)
 {
 	t_philo	*info_philo;
@@ -64,11 +62,7 @@ void	*philo_check_dead_loop(void *philo_para)
 	while (1)
 	{
 		sem_wait(sem_time_last_meal);
-		static_sem_philo_last_meal_time[info_philo->my_id - 1]--;
-		printf("sem_philo_last_meal_time(%zu) : %d\n", info_philo->my_id, static_sem_philo_last_meal_time[sem_index]);
 		time_to_starve = get_cur_time() - info_philo->time_of_last_meal;
-		static_sem_philo_last_meal_time[info_philo->my_id - 1]++;
-		printf("sem_philo_last_meal_time(%zu) : %d\n", info_philo->my_id, static_sem_philo_last_meal_time[sem_index]);
 		sem_post(sem_time_last_meal);
 		if (info_philo->info_union->time_to_die <= time_to_starve)
 		{

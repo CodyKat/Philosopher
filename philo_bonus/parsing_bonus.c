@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:03:13 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/11 12:36:33 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/11 19:45:02 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,24 @@ void	make_each_philo_sem(t_union *info_union, t_philo *info_philo)
 
 void	init_after_parsing(t_union *info_union, t_philo *info_philo, int argc)
 {
+	int	max_num_of_get_forks;
+
+	if (info_union->num_of_philo % 2 == 0)
+		max_num_of_get_forks = info_union->num_of_philo / 2;
+	else
+		max_num_of_get_forks = (info_union->num_of_philo / 2) + 1;
 	info_philo->sem_each_philo_time_last_meal = \
 		(sem_t **)malloc(sizeof(sem_t *) * info_union->num_of_philo);
 	info_philo->sem_eat_count = \
 		(sem_t **)malloc(sizeof(sem_t *) * info_union->num_of_philo);
 	info_union->forks_set = sem_open("forks_set", O_CREAT, S_IRWXG, \
-												info_union->num_of_philo);
+											max_num_of_get_forks);
+	info_union->forks_set = sem_open("sem_get_forks", O_CREAT, S_IRWXG, \
+											max_num_of_get_forks);
 	if (info_union->forks_set == SEM_FAILED \
+		|| info_union->sem_get_forks == SEM_FAILED \
 		|| info_philo->sem_eat_count == NULL \
-		||info_philo->sem_each_philo_time_last_meal == NULL)
+		|| info_philo->sem_each_philo_time_last_meal == NULL)
 		ft_error(info_union, info_philo);
 	make_each_philo_sem(info_union, info_philo);
 	if (argc == 6)
