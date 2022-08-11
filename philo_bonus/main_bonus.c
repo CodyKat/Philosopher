@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 14:30:07 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/11 13:26:53 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+int	static_sem_philo_last_meal_time[10] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+int	static_sem_is_someone_dead = 1;
 
 void	make_philos(t_union *info_union, t_philo *info_philo)
 {

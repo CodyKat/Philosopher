@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_behave_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 00:38:05 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 05:49:30 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/11 13:27:54 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	philo_is_speaking(t_philo *info_philo, size_t time_stamp, char *message)
 {
 	sem_wait(info_philo->info_union->voice);
-	printf("%zu %zu %s\n", \
-		time_stamp, info_philo->my_id, message);
+	// printf("%zu %zu %s\n", \
+	// 	time_stamp, info_philo->my_id, message);
+	time_stamp++;
+	message++;
 	sem_post(info_philo->info_union->voice);
 }
 
