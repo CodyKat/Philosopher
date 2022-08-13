@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 00:24:35 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 05:00:54 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/13 12:32:43 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	close_philo_sem(t_philo *info_philo)
 void	close_union_sem(t_union *info_union)
 {
 	sem_close(info_union->forks_set);
+	sem_close(info_union->sem_can_get_forks);
 	sem_close(info_union->voice);
 	sem_close(info_union->start_key);
 	sem_close(info_union->full_count);

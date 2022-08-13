@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:41:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/11 19:38:18 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/13 12:35:30 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 # define INT_MAX 2147483647
 # define LOCK 1
 # define UNLOCK 0
-# define GET 42
-# define SET 24
 
 typedef struct s_union
 {
@@ -42,13 +40,13 @@ typedef struct s_union
 	size_t			time_to_start;
 	size_t			num_each_philo_must_eat;
 	sem_t			*forks_set;
+	sem_t			*sem_can_get_forks;
 	sem_t			*voice;
 	sem_t			*start_key;
 	sem_t			*full_count;
 	sem_t			*dead_flag;
 	sem_t			*end_game;
 	sem_t			*sem_is_someone_dead;
-	sem_t			*sem_get_forks;
 	pid_t			*philo_pid_arr;
 }	t_union;
 

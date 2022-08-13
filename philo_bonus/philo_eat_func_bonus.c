@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 19:22:55 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/11 19:22:21 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/13 12:34:14 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	philo_eat_with_no_option(t_philo *info_philo)
 																"is eating");
 	while (get_cur_time() < time_to_finish_eat)
 		usleep(300);
+	sem_post(info_philo->info_union->sem_can_get_forks);
 	sem_post(info_philo->info_union->forks_set);
 	sem_post(info_philo->info_union->forks_set);
 }
@@ -56,6 +57,7 @@ void	philo_eat_with_option(t_philo *info_philo)
 																"is eating");
 	while (get_cur_time() < time_to_finish_eat)
 		usleep(300);
+	sem_post(info_philo->info_union->sem_can_get_forks);
 	sem_post(info_philo->info_union->forks_set);
 	sem_post(info_philo->info_union->forks_set);
 	info_philo->eat_count++;
