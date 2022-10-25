@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 23:40:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/10 04:26:06 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:04:49 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(int argc, char *argv[])
 	if (parsing(&info_union, argc, argv) == ERROR)
 		return (ft_error());
 	if (malloc_and_init_resources(&info_union, &info_philo_arr) == ERROR)
-		ft_error();
+		return (ft_error());
 	if (argc == 6)
 		watcher = watcher_optional;
 	else
